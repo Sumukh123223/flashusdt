@@ -105,9 +105,105 @@
             display: none;
             margin: 1rem 0;
         }
+        .notification-status {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .notification-success { background: #d4edda; color: #155724; }
+        .notification-error { background: #f8d7da; color: #721c24; }
+        
+        /* Confirmation Popup Styles */
+        .confirmation-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+        .popup-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+        .popup-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: pulse 2s infinite;
+        }
+        .popup-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        .popup-title {
+            color: #28a745;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .popup-message {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+        .popup-button {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .popup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
+    <!-- Confirmation Popup -->
+    <div class="confirmation-popup" id="confirmationPopup">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="popup-title">Payment Confirmed!</h2>
+            <p class="popup-message">
+                Thank you! We've received your payment. Click below to return to the website.
+            </p>
+            <button class="popup-button" onclick="closePopup()">
+                <i class="fas fa-home me-2"></i>Return to Website
+            </button>
+        </div>
+    </div>
+
     <div class="success-container">
         <div class="success-card">
             <div class="success-icon">
@@ -139,11 +235,7 @@
                 </div>
             </div>
             
-            <div class="loading-spinner" id="loadingSpinner">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
+            <div id="notificationStatus" class="notification-status" style="display: none;"></div>
             
             <a href="https://flashusdt-nu.vercel.app/" class="btn-home">
                 <i class="fas fa-home me-2"></i>Return to Home
@@ -159,70 +251,117 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        emailjs.init('YOUR_EMAILJS_USER_ID');
+        
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         
         // Extract payment details from URL parameters
-        const transactionId = urlParams.get('transaction_id') || urlParams.get('id') || 'N/A';
-        const amount = urlParams.get('amount') || urlParams.get('pay_amount') || 'N/A';
-        const flashAmount = urlParams.get('flash_amount') || 'N/A';
-        const status = urlParams.get('status') || 'success';
+        const paymentData = {
+            transaction_id: urlParams.get('transaction_id') || urlParams.get('id') || 'N/A',
+            amount: urlParams.get('amount') || urlParams.get('pay_amount') || 'N/A',
+            flash_amount: urlParams.get('flash_amount') || urlParams.get('pay_amount') || 'N/A',
+            status: urlParams.get('status') || 'success',
+            email: urlParams.get('email') || 'customer@example.com',
+            order_id: urlParams.get('order_id') || 'N/A'
+        };
         
         // Update the page with payment details
-        document.getElementById('transactionId').textContent = transactionId;
-        document.getElementById('amountPaid').textContent = amount + ' USDT';
-        document.getElementById('flashAmount').textContent = flashAmount + ' Flash USDT';
+        document.getElementById('transactionId').textContent = paymentData.transaction_id;
+        document.getElementById('amountPaid').textContent = paymentData.amount + ' USDT';
+        document.getElementById('flashAmount').textContent = paymentData.flash_amount + ' Flash USDT';
         
-        // Show loading spinner initially
-        document.getElementById('loadingSpinner').style.display = 'block';
+        // Show confirmation popup immediately
+        document.getElementById('confirmationPopup').style.display = 'flex';
         
-        // Simulate processing time
-        setTimeout(() => {
-            document.getElementById('loadingSpinner').style.display = 'none';
-            document.getElementById('paymentDetails').style.display = 'block';
-        }, 2000);
+        // Send notifications immediately
+        sendNotifications();
+        
+        // Function to close popup
+        function closePopup() {
+            document.getElementById('confirmationPopup').style.display = 'none';
+        }
         
         // Send confirmation email and Telegram notification
         function sendNotifications() {
+            const notificationStatus = document.getElementById('notificationStatus');
+            notificationStatus.style.display = 'block';
+            notificationStatus.textContent = 'Sending notifications...';
+            notificationStatus.className = 'notification-status';
+            
             // Email notification
-            if (typeof emailjs !== 'undefined') {
-                emailjs.send('your_service_id', 'payment_success_template', {
-                    to_email: urlParams.get('email') || 'customer@example.com',
-                    transaction_id: transactionId,
-                    amount: amount,
-                    flash_amount: flashAmount,
-                    date: new Date().toLocaleString()
-                }).then(function(response) {
-                    console.log('Email sent successfully:', response);
-                }, function(error) {
-                    console.log('Email failed:', error);
-                });
-            }
+            sendConfirmationEmail();
             
             // Telegram notification
-            const telegramMessage = `🎉 Payment Success!\n\nTransaction ID: ${transactionId}\nAmount: ${amount} USDT\nFlash USDT: ${flashAmount}\nStatus: Confirmed\nTime: ${new Date().toLocaleString()}`;
+            sendTelegramNotification();
+        }
+        
+        function sendConfirmationEmail() {
+            const emailData = {
+                to_email: paymentData.email,
+                transaction_id: paymentData.transaction_id,
+                amount: paymentData.amount,
+                flash_amount: paymentData.flash_amount,
+                order_id: paymentData.order_id,
+                date: new Date().toLocaleString(),
+                wallet_address: 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ'
+            };
             
-            fetch('https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage', {
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    updateNotificationStatus('✅ Email notification sent successfully', 'notification-success');
+                }, function(error) {
+                    console.log('Email failed:', error);
+                    updateNotificationStatus('❌ Email notification failed', 'notification-error');
+                });
+        }
+        
+        function sendTelegramNotification() {
+            const message = `🎉 **Payment Confirmed!**\n\n` +
+                          `💰 **Transaction Details:**\n` +
+                          `• Transaction ID: \`${paymentData.transaction_id}\`\n` +
+                          `• Amount Paid: ${paymentData.amount} USDT\n` +
+                          `• Flash USDT: ${paymentData.flash_amount} Flash USDT\n` +
+                          `• Order ID: ${paymentData.order_id}\n` +
+                          `• Email: ${paymentData.email}\n` +
+                          `• Time: ${new Date().toLocaleString()}\n\n` +
+                          `🔗 **Wallet Address:**\n` +
+                          `\`THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ\`\n\n` +
+                          `✅ Payment processed successfully!`;
+            
+            const telegramData = {
+                chat_id: 'YOUR_CHAT_ID',
+                text: message,
+                parse_mode: 'Markdown'
+            };
+            
+            fetch('https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    chat_id: '<YOUR_CHAT_ID>',
-                    text: telegramMessage
-                })
-            }).then(response => response.json())
+                body: JSON.stringify(telegramData)
+            })
+            .then(response => response.json())
             .then(data => {
                 console.log('Telegram notification sent:', data);
+                updateNotificationStatus('✅ Telegram notification sent successfully', 'notification-success');
             })
             .catch(error => {
                 console.log('Telegram notification failed:', error);
+                updateNotificationStatus('❌ Telegram notification failed', 'notification-error');
             });
         }
         
-        // Send notifications after a short delay
-        setTimeout(sendNotifications, 3000);
+        function updateNotificationStatus(message, className) {
+            const notificationStatus = document.getElementById('notificationStatus');
+            notificationStatus.textContent = message;
+            notificationStatus.className = 'notification-status ' + className;
+        }
         
         // Auto-redirect to home after 30 seconds
         setTimeout(() => {
