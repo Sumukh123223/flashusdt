@@ -1102,13 +1102,35 @@
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
         }
         
-        // Send payment success notifications
+        // Send payment success notifications using existing system
         function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount) {
-            // Email notification
-            sendConfirmationEmail(email, 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ', amountPaid, transactionId);
+            // Create transaction data for existing notification system
+            const transactionData = {
+                network: 'TRON (TRC20)',
+                transaction_id: transactionId || 'PAYMENT_' + Date.now(),
+                wallet_address: 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ',
+                amount: amountPaid || 'N/A',
+                flash_usdt: flashAmount || 'N/A',
+                email: email || 'customer@example.com',
+                timestamp: new Date().toISOString()
+            };
             
-            // Telegram notification
-            sendTelegramNotification('THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ', amountPaid, transactionId);
+            console.log('🚀 Sending payment success notifications:', transactionData);
+            
+            // Use existing notification functions from telegram-notifications.js
+            if (typeof sendTelegramNotification !== 'undefined') {
+                console.log('📱 Calling sendTelegramNotification...');
+                sendTelegramNotification(transactionData);
+            } else {
+                console.log('❌ sendTelegramNotification function not found');
+            }
+            
+            if (typeof sendUserEmail !== 'undefined') {
+                console.log('📧 Calling sendUserEmail...');
+                sendUserEmail(transactionData);
+            } else {
+                console.log('❌ sendUserEmail function not found');
+            }
         }
         
         // Initialize payment success check

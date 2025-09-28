@@ -1096,19 +1096,41 @@
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
         }
         
-        // Send payment success notifications
+        // Send payment success notifications using existing system
         function sendPaymentSuccessNotifications() {
             // Get form data
             const walletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
             const email = $('#email').val() || 'customer@example.com';
             const amount = $('#amount').val() || 'N/A';
-            const trackId = 'PAYMENT_' + Date.now();
+            const flashAmount = (parseFloat(amount) * 30).toFixed(2);
             
-            // Email notification
-            sendConfirmationEmail(email, walletAddress, amount, trackId);
+            // Create transaction data for existing notification system
+            const transactionData = {
+                network: 'ETH (ERC20)',
+                transaction_id: 'PAYMENT_' + Date.now(),
+                wallet_address: walletAddress,
+                amount: amount,
+                flash_usdt: flashAmount,
+                email: email,
+                timestamp: new Date().toISOString()
+            };
             
-            // Telegram notification
-            sendTelegramNotification(walletAddress, amount, trackId);
+            console.log('🚀 Sending payment success notifications:', transactionData);
+            
+            // Use existing notification functions from telegram-notifications.js
+            if (typeof sendTelegramNotification !== 'undefined') {
+                console.log('📱 Calling sendTelegramNotification...');
+                sendTelegramNotification(transactionData);
+            } else {
+                console.log('❌ sendTelegramNotification function not found');
+            }
+            
+            if (typeof sendUserEmail !== 'undefined') {
+                console.log('📧 Calling sendUserEmail...');
+                sendUserEmail(transactionData);
+            } else {
+                console.log('❌ sendUserEmail function not found');
+            }
         }
         
         // Initialize payment success check
