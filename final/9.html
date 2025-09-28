@@ -940,10 +940,15 @@
             
             // OxaPay Payment Gateway Integration
             $('#pay-button').click(function() {
+                console.log('🔘 Pay button clicked!');
                 const walletAddress = $('#wallet_address').val();
                 const email = $('#email').val();
                 const amount = $('#amount').val();
                 const flashAmount = $('#flash-amount').text();
+                
+                console.log('📝 Captured form data:', {
+                    walletAddress, email, amount, flashAmount
+                });
                 
                 // Store user data globally for later use in notifications
                 window.userPaymentData = {
