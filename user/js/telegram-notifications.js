@@ -1,27 +1,6 @@
 // Telegram Bot Configuration
-console.log('🚀 telegram-notifications.js loaded successfully!');
-console.log('📱 Script version: 2.0 - Enhanced debugging');
-
 const TELEGRAM_BOT_TOKEN = '8240287573:AAE4NTxWAmBB0GezTFnK-rrMIr5j5BYxb1c'; // Replace with your bot token
 const TELEGRAM_CHAT_ID = '8191508290'; // Replace with your chat ID
-
-console.log('🔧 Telegram Bot Token loaded:', TELEGRAM_BOT_TOKEN ? 'YES' : 'NO');
-console.log('🔧 Telegram Chat ID loaded:', TELEGRAM_CHAT_ID ? 'YES' : 'NO');
-
-// Immediate test when script loads
-console.log('🧪 Running immediate Telegram test...');
-try {
-    testTelegramBot().then(result => {
-        console.log('🧪 Immediate bot test result:', result);
-        if (result) {
-            testTelegramChat().then(chatResult => {
-                console.log('🧪 Immediate chat test result:', chatResult);
-            });
-        }
-    });
-} catch (error) {
-    console.error('❌ Error running immediate test:', error);
-}
 
 // Test Telegram bot connection
 async function testTelegramBot() {
@@ -80,11 +59,6 @@ const EMAILJS_PUBLIC_KEY = '0Z2AxrijfYWKHDmqV'; // Replace with your EmailJS pub
 // Send Telegram notification
 async function sendTelegramNotification(transactionData) {
     try {
-        console.log('🚀 Starting Telegram notification...');
-        console.log('📱 Bot Token:', TELEGRAM_BOT_TOKEN);
-        console.log('💬 Chat ID:', TELEGRAM_CHAT_ID);
-        console.log('📊 Transaction Data:', transactionData);
-        
         // Simple message without HTML formatting to avoid parsing issues
         const message = `🚨 NEW TRANSACTION SUBMITTED 🚨
 
@@ -102,39 +76,24 @@ async function sendTelegramNotification(transactionData) {
 
 🔗 Transaction Hash: ${transactionData.transaction_id}`;
 
-        console.log('📝 Message to send:', message);
-
-        const requestBody = {
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message
-        };
-        
-        console.log('📤 Request body:', requestBody);
-
         const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
+            })
         });
 
-        console.log('📡 Response status:', response.status);
-        console.log('📡 Response ok:', response.ok);
-
         const responseData = await response.json();
-        console.log('📨 Response data:', responseData);
 
         if (response.ok && responseData.ok) {
             console.log('✅ Telegram notification sent successfully');
             return true;
         } else {
             console.error('❌ Failed to send Telegram notification:', responseData);
-            console.error('❌ Error details:', {
-                error_code: responseData.error_code,
-                description: responseData.description,
-                ok: responseData.ok
-            });
             
             // Try alternative Chat ID format
             if (responseData.error_code === 400) {
@@ -145,7 +104,6 @@ async function sendTelegramNotification(transactionData) {
         }
     } catch (error) {
         console.error('❌ Error sending Telegram notification:', error);
-        console.error('❌ Error stack:', error.stack);
         return false;
     }
 }
