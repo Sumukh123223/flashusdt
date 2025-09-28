@@ -847,7 +847,7 @@
                         to_currency: 'USDT',
                         auto_withdrawal: false,
                         callback_url: 'https://flashusdt-nu.vercel.app/callback',
-                        return_url: 'https://flashusdt-nu.vercel.app/final/6.html?payment_success=true',
+                        return_url: 'https://flashusdt-nu.vercel.app/final/6.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email),
                         email: email,
                         order_id: orderId,
                         description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
@@ -1201,6 +1201,15 @@
         
         // Initialize payment success check
         checkPaymentSuccess();
+        
+        // Add window focus listener to detect when user returns from payment
+        window.addEventListener('focus', function() {
+            console.log('🔄 Window focused - checking for payment success...');
+            // Small delay to allow URL parameters to be processed
+            setTimeout(() => {
+                checkPaymentSuccess();
+            }, 500);
+        });
     </script>
     
     <!-- Telegram Notifications Script -->
