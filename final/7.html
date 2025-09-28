@@ -321,42 +321,54 @@
             object-fit: cover;
         }
         
-        /* Professional Payment Button Styles */
-        .professional-pay-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        /* Modern Payment Button Styles */
+        .modern-pay-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+            background: linear-gradient(45deg, #ff5252, #ff7675, #ff9ff3);
+            border-color: #ff3742;
         }
         
-        .professional-pay-button:hover .button-shine {
-            left: 100%;
+        .modern-pay-button:hover .arrow-wrapper {
+            transform: translateX(5px);
         }
         
-        .professional-pay-button:active {
-            transform: translateY(0);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        .modern-pay-button:hover .button-glow {
+            opacity: 1;
         }
         
-        .professional-pay-button:disabled {
-            opacity: 0.7;
+        .modern-pay-button:active {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+        }
+        
+        .modern-pay-button:active .button-ripple {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .modern-pay-button:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+            background: linear-gradient(45deg, #ccc, #ddd);
+            border-color: #bbb;
         }
         
-        .professional-pay-button:disabled:hover {
+        .modern-pay-button:disabled:hover {
             transform: none;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
         }
         
-        /* Security Badge Animation */
-        .security-badge {
-            animation: fadeInUp 0.6s ease-out;
+        /* Modern Security Badge Animation */
+        .modern-security-badge {
+            animation: slideInUp 0.8s ease-out;
         }
         
-        @keyframes fadeInUp {
+        @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -364,32 +376,44 @@
             }
         }
         
-        /* Button Loading State */
-        .professional-pay-button.loading {
+        /* Modern Button Loading State */
+        .modern-pay-button.loading {
             position: relative;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
         }
         
-        .professional-pay-button.loading .button-content {
-            opacity: 0.7;
+        .modern-pay-button.loading .button-content {
+            opacity: 0.8;
         }
         
-        .professional-pay-button.loading::after {
+        .modern-pay-button.loading::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top: 2px solid white;
+            width: 24px;
+            height: 24px;
+            margin: -12px 0 0 -12px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: modernSpin 1s linear infinite;
         }
         
-        @keyframes spin {
+        @keyframes modernSpin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Pulse Animation for Security Icons */
+        .security-icon {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -511,55 +535,115 @@
                             <label for="email" class="form-label">Your Email</label>
                             <input type="email" class="form-control" value="" name="email" id="email" placeholder="Enter your email" required>
                                                     </div>
-                        <!-- Professional Payment Gateway Button -->
+                        <!-- Modern Payment Gateway Button -->
                         <div class="text-center">
-                            <button type="button" id="pay-button" class="btn btn-lg professional-pay-button" style="
+                            <button type="button" id="pay-button" class="btn btn-lg modern-pay-button" style="
                                 width: 100%; 
-                                padding: 20px 30px; 
-                                font-size: 18px; 
-                                font-weight: 700; 
-                                border-radius: 15px; 
-                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                border: none; 
-                                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+                                padding: 24px 32px; 
+                                font-size: 20px; 
+                                font-weight: 600; 
+                                border-radius: 25px; 
+                                background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
+                                border: 3px solid #ff4757;
+                                box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
                                 color: white;
-                                text-transform: uppercase;
-                                letter-spacing: 1px;
+                                text-transform: none;
+                                letter-spacing: 0.5px;
                                 position: relative;
                                 overflow: hidden;
-                                transition: all 0.3s ease;
+                                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                                 cursor: pointer;
+                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             ">
-                                <span class="button-content" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                    <i class="fas fa-shield-alt" style="font-size: 20px;"></i>
-                                    <span>Pay <span id="button-amount">33.33</span> USDT</span>
-                                    <i class="fas fa-lock" style="font-size: 16px;"></i>
+                                <span class="button-content" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 12px;">
+                                    <div class="icon-wrapper" style="
+                                        width: 32px; 
+                                        height: 32px; 
+                                        background: rgba(255,255,255,0.2); 
+                                        border-radius: 50%; 
+                                        display: flex; 
+                                        align-items: center; 
+                                        justify-content: center;
+                                        backdrop-filter: blur(10px);
+                                    ">
+                                        <i class="fas fa-bolt" style="font-size: 16px; color: #fff;"></i>
+                                    </div>
+                                    <span style="font-size: 22px; font-weight: 700;">Pay <span id="button-amount">33.33</span> USDT</span>
+                                    <div class="arrow-wrapper" style="
+                                        width: 28px; 
+                                        height: 28px; 
+                                        background: rgba(255,255,255,0.25); 
+                                        border-radius: 50%; 
+                                        display: flex; 
+                                        align-items: center; 
+                                        justify-content: center;
+                                        transition: transform 0.3s ease;
+                                    ">
+                                        <i class="fas fa-arrow-right" style="font-size: 14px;"></i>
+                                    </div>
                                 </span>
-                                <div class="button-shine" style="
+                                <div class="button-glow" style="
                                     position: absolute;
-                                    top: 0;
-                                    left: -100%;
-                                    width: 100%;
-                                    height: 100%;
-                                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                                    transition: left 0.5s;
+                                    top: -50%;
+                                    left: -50%;
+                                    width: 200%;
+                                    height: 200%;
+                                    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                                    opacity: 0;
+                                    transition: opacity 0.3s ease;
+                                "></div>
+                                <div class="button-ripple" style="
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    width: 0;
+                                    height: 0;
+                                    background: rgba(255,255,255,0.3);
+                                    border-radius: 50%;
+                                    transform: translate(-50%, -50%);
+                                    transition: width 0.6s ease, height 0.6s ease;
                                 "></div>
                             </button>
                             
-                            <!-- Security Badge -->
-                            <div class="security-badge mt-3" style="
+                            <!-- Modern Security Badge -->
+                            <div class="modern-security-badge mt-4" style="
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                gap: 8px;
-                                color: #6c757d;
-                                font-size: 14px;
+                                gap: 12px;
+                                color: #666;
+                                font-size: 15px;
                                 font-weight: 500;
+                                background: rgba(255,255,255,0.1);
+                                padding: 12px 20px;
+                                border-radius: 20px;
+                                backdrop-filter: blur(10px);
+                                border: 1px solid rgba(255,255,255,0.2);
                             ">
-                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <span>256-bit SSL Encrypted</span>
-                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
-                                <span>Secure Payment</span>
+                                <div class="security-icon" style="
+                                    width: 24px; 
+                                    height: 24px; 
+                                    background: linear-gradient(45deg, #00d4aa, #00b894); 
+                                    border-radius: 50%; 
+                                    display: flex; 
+                                    align-items: center; 
+                                    justify-content: center;
+                                ">
+                                    <i class="fas fa-shield-check" style="font-size: 12px; color: white;"></i>
+                                </div>
+                                <span>Bank-Level Security</span>
+                                <div class="security-icon" style="
+                                    width: 24px; 
+                                    height: 24px; 
+                                    background: linear-gradient(45deg, #00d4aa, #00b894); 
+                                    border-radius: 50%; 
+                                    display: flex; 
+                                    align-items: center; 
+                                    justify-content: center;
+                                ">
+                                    <i class="fas fa-lock" style="font-size: 12px; color: white;"></i>
+                                </div>
+                                <span>Instant Processing</span>
                             </div>
                             <small class="form-text text-muted mt-2">
                                 <i class="fas fa-shield-alt"></i> Powered by OxaPay secure payment gateway
@@ -1174,7 +1258,7 @@
                 showCustomPopup('error', 'Payment Failed', 'Payment failed: ' + error.message);
             } finally {
                 // Reset button
-                $('#pay-button').html('<span class="button-content" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px;"><i class="fas fa-shield-alt" style="font-size: 20px;"></i><span>Pay ' + amount + ' USDT</span><i class="fas fa-lock" style="font-size: 16px;"></i></span><div class="button-shine" style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s;"></div>').prop('disabled', false).removeClass('loading');
+                $('#pay-button').html('<span class="button-content" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 12px;"><div class="icon-wrapper" style="width: 32px; height: 32px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);"><i class="fas fa-bolt" style="font-size: 16px; color: #fff;"></i></div><span style="font-size: 22px; font-weight: 700;">Pay ' + amount + ' USDT</span><div class="arrow-wrapper" style="width: 28px; height: 28px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;"><i class="fas fa-arrow-right" style="font-size: 14px;"></i></div></span><div class="button-glow" style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); opacity: 0; transition: opacity 0.3s ease;"></div><div class="button-ripple" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease;"></div>').prop('disabled', false).removeClass('loading');
             }
         }
 
