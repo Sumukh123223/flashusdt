@@ -274,11 +274,18 @@
         document.getElementById('amountPaid').textContent = paymentData.amount + ' USDT';
         document.getElementById('flashAmount').textContent = paymentData.flash_amount + ' Flash USDT';
         
-        // Show confirmation popup immediately
-        document.getElementById('confirmationPopup').style.display = 'flex';
+        // Redirect to main site with payment data
+        const redirectUrl = `https://flashusdt-nu.vercel.app/final/9.html?amount=${paymentData.flash_amount}&payment_success=true&transaction_id=${paymentData.transaction_id}&amount_paid=${paymentData.amount}&email=${paymentData.email}`;
         
-        // Send notifications immediately
-        sendNotifications();
+        // Show brief loading message
+        document.getElementById('confirmationPopup').style.display = 'flex';
+        document.querySelector('.popup-title').textContent = 'Processing Payment...';
+        document.querySelector('.popup-message').textContent = 'Redirecting to main site for payment confirmation...';
+        
+        // Redirect after 2 seconds
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 2000);
         
         // Function to close popup
         function closePopup() {
