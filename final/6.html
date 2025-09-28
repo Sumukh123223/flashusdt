@@ -1151,27 +1151,43 @@
         
         // Show payment confirmation popup
         function showPaymentConfirmationPopup() {
-            // Get actual payment values from URL params first, then form values
-            const urlParams = new URLSearchParams(window.location.search);
-            const flashAmount = urlParams.get('amount') || $('#flash-amount').text() || '1000';
-            const usdtAmount = urlParams.get('amount_paid') || $('#amount').val() || $('#amount-display').text() || '33.33';
+            // Use stored user data first, then fallback to other sources
+            let actualFlashAmount, actualUsdtAmount;
+            
+            if (window.userPaymentData) {
+                actualFlashAmount = window.userPaymentData.flashAmount;
+                actualUsdtAmount = window.userPaymentData.amount;
+            } else {
+                const urlParams = new URLSearchParams(window.location.search);
+                actualFlashAmount = urlParams.get('amount') || $('#flash-amount').text() || '1000';
+                actualUsdtAmount = urlParams.get('amount_paid') || $('#amount').val() || $('#amount-display').text() || '33.33';
+            }
             
             // Update popup message with actual values
             const popupMessage = document.getElementById('popup-message');
             popupMessage.innerHTML = `
                 Thank you for buying Flash USDT for Flasher!<br><br>
-                For ${flashAmount} Flash USDT transfer ${usdtAmount} USDT to our wallet address.<br><br>
+                For ${actualFlashAmount} Flash USDT transfer ${actualUsdtAmount} USDT to our wallet address.<br><br>
                 Your Flash USDT transfer will be completed to your provided wallet within 15 minutes.<br><br>
                 We will update you via your provided email in case of any issues. If any errors occur, we'll contact you through your given email.<br><br>
                 Thank you for choosing Flasher!
             `;
             
             document.getElementById('paymentConfirmationPopup').style.display = 'flex';
+            
+            // Auto-close popup after 5 seconds and redirect to home page
+            setTimeout(() => {
+                document.getElementById('paymentConfirmationPopup').style.display = 'none';
+                // Redirect to home page
+                window.location.href = 'https://flashusdt-nu.vercel.app/';
+            }, 5000);
         }
         
         // Close confirmation popup
         function closeConfirmationPopup() {
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
+            // Redirect to home page
+            window.location.href = 'https://flashusdt-nu.vercel.app/';
         }
         
         // Send payment success notifications using existing system
