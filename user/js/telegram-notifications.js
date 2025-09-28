@@ -330,7 +330,11 @@ async function handleTransactionSubmission(form, transactionType) {
 
         // Validate required fields
         if (!transaction_id || !wallet_address || !amount || !email) {
-            alert('Please fill in all required fields');
+            if (typeof showCustomPopup !== 'undefined') {
+                showCustomPopup('warning', 'Required Fields', 'Please fill in all required fields');
+            } else {
+                alert('Please fill in all required fields');
+            }
             return false;
         }
 
@@ -344,7 +348,11 @@ async function handleTransactionSubmission(form, transactionType) {
         // Validate amount (minimum 33.33 USDT = 1000 Flash USDT)
         const minUSDT = 33.33;
         if (parseFloat(amount) < minUSDT) {
-            alert(`Minimum amount is ${minUSDT} USDT`);
+            if (typeof showCustomPopup !== 'undefined') {
+                showCustomPopup('warning', 'Minimum Amount', `Minimum amount is ${minUSDT} USDT`);
+            } else {
+                alert(`Minimum amount is ${minUSDT} USDT`);
+            }
             return false;
         }
 
@@ -380,14 +388,22 @@ async function handleTransactionSubmission(form, transactionType) {
             showSuccessPopup();
             form.reset();
         } else {
-            alert('Transaction submitted, but there was an issue sending notifications. Please contact support.');
+            if (typeof showCustomPopup !== 'undefined') {
+                showCustomPopup('warning', 'Notification Issue', 'Transaction submitted, but there was an issue sending notifications. Please contact support.');
+            } else {
+                alert('Transaction submitted, but there was an issue sending notifications. Please contact support.');
+            }
         }
 
         return true;
 
     } catch (error) {
         console.error('Transaction processing error:', error);
-        alert('An error occurred while processing your transaction. Please try again.');
+        if (typeof showCustomPopup !== 'undefined') {
+            showCustomPopup('error', 'Processing Error', 'An error occurred while processing your transaction. Please try again.');
+        } else {
+            alert('An error occurred while processing your transaction. Please try again.');
+        }
         return false;
     }
 }
