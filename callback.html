@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Callback - Flash USDT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .callback-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="callback-container">
+        <h1>Payment Callback Handler</h1>
+        <p>This page handles payment callbacks from OxaPay.</p>
+        
+        <div id="callbackStatus" class="status info">
+            Processing callback...
+        </div>
+        
+        <div id="callbackDetails" style="display: none;">
+            <h3>Callback Details:</h3>
+            <pre id="callbackData"></pre>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Extract callback data
+        const callbackData = {
+            status: urlParams.get('status'),
+            transaction_id: urlParams.get('transaction_id'),
+            amount: urlParams.get('amount'),
+            pay_amount: urlParams.get('pay_amount'),
+            pay_currency: urlParams.get('pay_currency'),
+            to_currency: urlParams.get('to_currency'),
+            order_id: urlParams.get('order_id'),
+            email: urlParams.get('email'),
+            description: urlParams.get('description')
+        };
+        
+        // Display callback status
+        const statusDiv = document.getElementById('callbackStatus');
+        const detailsDiv = document.getElementById('callbackDetails');
+        const dataPre = document.getElementById('callbackData');
+        
+        if (callbackData.status === 'success' || callbackData.status === 'confirmed') {
+            statusDiv.className = 'status success';
+            statusDiv.textContent = '✅ Payment Callback Received Successfully';
+            
+            // Show details
+            detailsDiv.style.display = 'block';
+            dataPre.textContent = JSON.stringify(callbackData, null, 2);
+            
+            // Process successful payment
+            processSuccessfulPayment(callbackData);
+            
+        } else if (callbackData.status === 'failed' || callbackData.status === 'cancelled') {
+            statusDiv.className = 'status error';
+            statusDiv.textContent = '❌ Payment Callback Failed';
+            
+            // Show details
+            detailsDiv.style.display = 'block';
+            dataPre.textContent = JSON.stringify(callbackData, null, 2);
+            
+        } else {
+            statusDiv.className = 'status info';
+            statusDiv.textContent = 'ℹ️ Payment Callback Received';
+            
+            // Show details
+            detailsDiv.style.display = 'block';
+            dataPre.textContent = JSON.stringify(callbackData, null, 2);
+        }
+        
+        function processSuccessfulPayment(data) {
+            // Send confirmation email
+            sendConfirmationEmail(data);
+            
+            // Send Telegram notification
+            sendTelegramNotification(data);
+            
+            // Log to console (in production, you'd log to a database)
+            console.log('Payment processed successfully:', data);
+        }
+        
+        function sendConfirmationEmail(data) {
+            // EmailJS integration for confirmation email
+            if (typeof emailjs !== 'undefined') {
+                emailjs.send('your_service_id', 'payment_confirmation_template', {
+                    to_email: data.email || 'customer@example.com',
+                    transaction_id: data.transaction_id,
+                    amount: data.amount,
+                    pay_amount: data.pay_amount,
+                    pay_currency: data.pay_currency,
+                    to_currency: data.to_currency,
+                    order_id: data.order_id,
+                    date: new Date().toLocaleString()
+                }).then(function(response) {
+                    console.log('Confirmation email sent:', response);
+                }, function(error) {
+                    console.log('Email failed:', error);
+                });
+            }
+        }
+        
+        function sendTelegramNotification(data) {
+            const message = `🎉 Payment Confirmed!\n\n` +
+                          `Transaction ID: ${data.transaction_id}\n` +
+                          `Amount: ${data.amount} ${data.pay_currency}\n` +
+                          `Flash USDT: ${data.pay_amount} ${data.to_currency}\n` +
+                          `Order ID: ${data.order_id}\n` +
+                          `Email: ${data.email}\n` +
+                          `Time: ${new Date().toLocaleString()}`;
+            
+            fetch('https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: '<YOUR_CHAT_ID>',
+                    text: message
+                })
+            }).then(response => response.json())
+            .then(data => {
+                console.log('Telegram notification sent:', data);
+            })
+            .catch(error => {
+                console.log('Telegram notification failed:', error);
+            });
+        }
+        
+        // Redirect to success page after processing
+        setTimeout(() => {
+            if (callbackData.status === 'success' || callbackData.status === 'confirmed') {
+                const successUrl = `https://flashusdt-nu.vercel.app/success.html?` +
+                    `transaction_id=${callbackData.transaction_id}&` +
+                    `amount=${callbackData.amount}&` +
+                    `flash_amount=${callbackData.pay_amount}&` +
+                    `status=${callbackData.status}`;
+                window.location.href = successUrl;
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
