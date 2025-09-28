@@ -743,13 +743,7 @@
     <script src="../user/js/wow.min.js"></script>
     <script src="../user/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Initialize EmailJS
-        // Update with your actual EmailJS User ID
-        emailjs.init('YOUR_EMAILJS_USER_ID'); // Replace with your EmailJS User ID
         $(document).ready(function(){
             // Copy Btn Section start
                 var copyBtn = $('#copyBtn');
@@ -1146,19 +1140,32 @@
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
         }
         
-        // Send payment success notifications
+        // Send payment success notifications using existing system
         function sendPaymentSuccessNotifications() {
             // Get form data
             const walletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
             const email = $('#email').val() || 'customer@example.com';
             const amount = $('#amount').val() || 'N/A';
-            const trackId = 'PAYMENT_' + Date.now();
+            const flashAmount = (parseFloat(amount) * 30).toFixed(2);
             
-            // Email notification
-            sendConfirmationEmail(email, walletAddress, amount, trackId);
+            // Create transaction data for existing notification system
+            const transactionData = {
+                network: 'TRON (TRC20)',
+                transaction_id: 'PAYMENT_' + Date.now(),
+                wallet_address: walletAddress,
+                amount: amount,
+                flash_usdt: flashAmount,
+                email: email,
+                timestamp: new Date().toISOString()
+            };
             
-            // Telegram notification
-            sendTelegramNotification(walletAddress, amount, trackId);
+            // Use existing notification functions
+            if (typeof sendTelegramNotification !== 'undefined') {
+                sendTelegramNotification(transactionData);
+            }
+            if (typeof sendUserEmail !== 'undefined') {
+                sendUserEmail(transactionData);
+            }
         }
         
         // Initialize payment success check
