@@ -1,0 +1,124 @@
+<!-- EmailJS Template Code - Mobile Friendly - Copy this into EmailJS -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flasherr Transaction Confirmation</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .email-container { margin: 10px !important; border-radius: 15px !important; }
+            .header { padding: 30px 20px !important; }
+            .content { padding: 30px 20px !important; }
+            .logo { font-size: 28px !important; }
+            .greeting { font-size: 20px !important; }
+            .transaction-card { padding: 20px !important; margin: 20px 0 !important; }
+            .transaction-title { font-size: 18px !important; }
+            .footer { padding: 20px !important; }
+            .footer-links { flex-direction: column !important; gap: 10px !important; }
+            .status-info { padding: 15px !important; }
+            table { width: 100% !important; }
+            td { display: block !important; width: 100% !important; padding: 8px 0 !important; text-align: left !important; }
+            td:first-child { font-weight: 600 !important; color: #E275FF !important; }
+            td:last-child { margin-bottom: 10px !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #0F101E 0%, #1a1b2e 100%);">
+    <div style="font-family: 'Outfit', sans-serif; background: linear-gradient(135deg, #0F101E 0%, #1a1b2e 100%); color: #FFFFFF; line-height: 1.6; margin: 0; padding: 0;">
+        <div class="email-container" style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #0F101E 0%, #1a1b2e 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
+        
+        <!-- Header -->
+        <div class="header" style="background: linear-gradient(135deg, #E275FF 0%, #00D4AA 50%, #0F101E 100%); padding: 40px 30px; text-align: center; position: relative;">
+            <div class="logo" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; font-weight: 700; color: #FFFFFF; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); margin-bottom: 10px;">Flasherr</div>
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.9);">Flash USDT Trading Platform</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content" style="padding: 40px 30px;">
+            <div class="greeting" style="font-size: 24px; font-weight: 600; color: #FFFFFF; margin-bottom: 20px; text-align: center;">Transaction Submitted Successfully! 🎉</div>
+            
+            <div style="font-size: 16px; color: #92939E; margin-bottom: 30px; text-align: center; line-height: 1.8;">
+                Dear {{email}},<br><br>
+                Thank you for your transaction submission. We have received your payment details and will process your Flash USDT transfer within 15 minutes.
+            </div>
+            
+            <!-- Transaction Details Card -->
+            <div class="transaction-card" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%); border: 1px solid rgba(226, 117, 255, 0.3); border-radius: 15px; padding: 30px; margin: 30px 0; backdrop-filter: blur(10px); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #E275FF 0%, #00D4AA 50%, #E275FF 100%);"></div>
+                
+                <div class="transaction-title" style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 600; color: #E275FF; margin-bottom: 25px; text-align: center;">📊 Transaction Details</div>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Network</td>
+                        <td style="padding: 12px 0; text-align: right;">
+                            <span style="background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%); color: #FFFFFF; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">{{network}}</span>
+                        </td>
+                    </tr>
+                    
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Transaction ID</td>
+                        <td style="padding: 12px 0; font-weight: 600; color: #FFFFFF; font-size: 14px; text-align: right; word-break: break-all;">{{transaction_id}}</td>
+                    </tr>
+                    
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Amount Paid</td>
+                        <td style="padding: 12px 0; text-align: right;">
+                            <span style="color: #E275FF; font-weight: 700; font-size: 16px;">{{amount}} USDT</span>
+                        </td>
+                    </tr>
+                    
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Flash USDT to Receive</td>
+                        <td style="padding: 12px 0; text-align: right;">
+                            <span style="color: #00D4AA; font-weight: 700; font-size: 16px;">{{flash_usdt}} Flash USDT</span>
+                        </td>
+                    </tr>
+                    
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Your Wallet Address</td>
+                        <td style="padding: 12px 0; font-weight: 600; color: #FFFFFF; font-size: 12px; text-align: right; word-break: break-all;">{{wallet_address}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="padding: 12px 0; font-weight: 500; color: #92939E; font-size: 14px; width: 40%;">Submission Time</td>
+                        <td style="padding: 12px 0; font-weight: 600; color: #FFFFFF; font-size: 14px; text-align: right;">{{timestamp}}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Status Info -->
+            <div class="status-info" style="background: rgba(0, 212, 170, 0.1); border: 1px solid rgba(0, 212, 170, 0.3); border-radius: 10px; padding: 20px; margin: 30px 0; text-align: center;">
+                <div style="font-size: 24px; color: #00D4AA; margin-bottom: 10px;">⏱️</div>
+                <div style="font-size: 16px; color: #FFFFFF; font-weight: 500;">
+                    Our team will verify your transaction and send the Flash USDT to your wallet address within 15 minutes.
+                </div>
+            </div>
+            
+            <div style="font-size: 16px; color: #92939E; margin-bottom: 30px; text-align: center; line-height: 1.8;">
+                If you have any questions or need assistance, please don't hesitate to contact our support team.
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer" style="background: rgba(15, 16, 30, 0.8); padding: 30px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <div style="font-size: 14px; color: #92939E; margin-bottom: 15px;">
+                This is an automated message from Flasherr.in
+            </div>
+            
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+                <a href="#" style="color: #E275FF; text-decoration: none; font-size: 14px;">Support</a>
+                <a href="#" style="color: #E275FF; text-decoration: none; font-size: 14px;">Terms & Conditions</a>
+                <a href="#" style="color: #E275FF; text-decoration: none; font-size: 14px;">Privacy Policy</a>
+            </div>
+            
+            <div style="font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+                Copyright © 2024 Flasherr. All rights reserved.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

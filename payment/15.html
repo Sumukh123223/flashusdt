@@ -1,0 +1,655 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Buy</title>
+    <meta name="description" content="IKO - ICO & Crypto Landing Page Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../user/img/favicon.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../user/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../user/css/animate.min.css">
+    <link rel="stylesheet" href="../user/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../user/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="../user/css/slick.css">
+    <link rel="stylesheet" href="../user/css/default.css">
+    <link rel="stylesheet" href="../user/css/style.css">
+    <link rel="stylesheet" href="../user/css/responsive.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
+      crossorigin="anonymous"
+    />
+        <style>
+    #inactiveP{
+        position: fixed;
+        top:50vh;
+        width:100%;
+        text-align: center;
+        margin:auto;
+        z-index: 100;
+        color: red;
+        font-size: 20px;
+        background-color: #fff;
+    }
+    #disableBtn{
+        background-color: grey !important;
+    }
+    #disableBtn::after{
+        display: none;
+    }
+    .btn:disabled {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+        cursor: not-allowed !important;
+        opacity: 0.65 !important;
+    }
+    .cardForm{
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(17, 25, 40, 0.75);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        position: relative;
+        bottom:10vh;
+    }
+    #usdtImg{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+    #usdtImg > img{
+        position: relative;
+        bottom: 50px;
+        margin: auto;
+    }
+    pre {
+        white-space: pre-wrap;       /* CSS3 */
+        white-space: -moz-pre-wrap;  /* Firefox */
+        white-space: -pre-wrap;      /* Opera <7 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* IE */
+    }
+    .USDTrate{
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
+        background-color: rgba(17, 25, 40, 0.89);
+        border-radius: 6px;
+        /* border: 1px solid rgba(255, 255, 255, 0.125); */
+        padding: 5px;
+        position: absolute;
+        right: 20px;
+        top: 70px;
+    }
+    </style>
+
+    <style>
+        .accordion-card .accordion-button:after{
+            content: "";
+        }
+        .brand-active2 .slick-slide{
+            height:100px;
+        }
+        .brand-active2 .slick-slide .brand-item{
+            height: 100%;
+        }
+        .brand-active2 .slick-slide .brand-item img{
+            padding: 0 15px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body class="home-purple-gradient">
+    <div id="preloader">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <!-- Preloader -->
+
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+
+    <header id="header" class="header-layout1">
+    <div id="sticky-header" class="menu-area transparent-header">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="menu-wrap">
+                        <nav class="menu-nav">
+                            <div class="logo">
+                                <a href="../index.html"><img src="../user/img/logo/logo.png" style="height: 50px;" alt="Logo"></a>
+                            </div>
+                            <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                <ul class="navigation">
+                                    <li class="  menu-item-has-children"><a class="section-link" href="../index.html">Home</a></li>
+                                    <li><a href="../index.html#feature" class="section-link">Feature</a></li>
+                                    <li><a href="../index.html#roadMap" class="section-link">RoadMap</a></li>
+                                    <li class=" "><a href="../resale.html" class="section-link">Resale</a></li>
+                                    <li class=" "><a href="../operative.html" class="section-link">Operator</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <nav class="menu-box">
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+            <div class="nav-logo">
+                <a href="../index.html"><img src="../user/img/logo/logo.png" style="height: 35px;" alt="Logo"></a>
+            </div>
+            <div class="menu-outer">
+                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+            </div>
+            <div class="social-links">
+                <ul class="clearfix list-wrap">
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                    <li>
+                        <a href="https://x.com/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M10.0596 7.34522L15.8879 0.570312H14.5068L9.44607 6.45287L5.40411 0.570312H0.742188L6.85442 9.46578L0.742188 16.5703H2.12338L7.4676 10.3581L11.7362 16.5703H16.3981L10.0593 7.34522H10.0596ZM8.16787 9.54415L7.54857 8.65836L2.62104 1.61005H4.74248L8.71905 7.29827L9.33834 8.18405L14.5074 15.5779H12.386L8.16787 9.54449V9.54415Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="menu-backdrop"></div>
+    <!-- End Mobile Menu -->
+</header>    <main>
+    <div class="hero-wrapper hero-2">
+        <div class="hero-bg-gradient1"></div>
+        <div class="hero-bg-gradient2"></div>
+        <div class="hero-gradient-ball alltuchtopdown"></div>
+        <div class="ripple-shape">
+            <span class="ripple-1"></span>
+            <span class="ripple-2"></span>
+            <span class="ripple-3"></span>
+            <span class="ripple-4"></span>
+            <span class="ripple-5"></span>
+        </div>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="card m-auto col-9 col-md-6 cardForm">
+                    <div id="usdtImg">
+                        <img id="img" src="../user/img/categories/17438918691118013155.png" height="99" width="99" class="rounded-circle" alt="">
+                    </div>
+                    <div class="USDTrate">
+                        1 USDT = 30 FLASH USDT 
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="usdt"> How much FLASH USDT you want ? </label><br><br>
+                            <input type="number" class="form-control" id="usdt" placeholder="Enter USDT">
+                            <div id="errorMessage" style="color: red; font-size: 14px; margin-top: 10px; display: none;">
+                                Minimum order value is 1 flash
+                            </div>
+                            <div id="stockMessage" style="color: red; font-size: 14px; margin-top: 10px; display: none;">
+                                Currently 0 stock are available
+                            </div>
+                        </div><br>
+                        <div class="text-center mt-3">
+                            <button type="button"   class="btn btn-primary" id="usdtCalBtn">Buy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="card m-auto col-9 col-md-6 cardForm">
+                    <div class="card-header fs-5">Features</div>
+                    <div class="card-body">
+                        
+                        <pre> 
+Flash POL (Polygon) Coming Soon!
+We’re excited to announce that Flash POL is currently in development and will be launching soon on the Polygon network! Our team is working hard to make it live.
+
+Right now, Flash Crypto is available and in stock on:
+	•	TRC-20
+	•	BEP-20
+	•	ERC-20
+
+Buy now while it’s still in stock — and stay tuned for the Flash POL launch!
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+    <!--==============================
+    our Brand Area 
+    ==============================--> <br><br>
+    <div class="brand-area2">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="brand-title text-center">
+                        <h6 class="title">Our top Partner</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-item-wrap style2">
+                <div class="row g-0 brand-active2">
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img01.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img02.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img03.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img04.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img05.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img07.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img04.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    RoadMap Area
+    ==============================-->
+    <div class="pt-130 pb-140 overflow-hidden bg-black2 position-relative z-index-common" id="roadMap">
+        <div class="bg-gradient-2">
+            <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+        </div>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-sm-8">
+                    <div class="section-title mb-50">
+                        <h2 class="title style2">Our Roadmap</h2>
+                    </div>
+                </div>
+                <div class="col-sm-auto">
+                    <div class="icon-box">
+                        <button class="slider-arrow prev-btn default"><i class="fas fa-arrow-left"></i></button>
+                        <button class="slider-arrow next-btn default"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid p-0">
+            <div class="slider-area position-relative">
+                <div class="row roadMap-active2 roadmap-slider1">
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">First</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Select USDT</h4>
+                                <p>Select which USDT you want <br> <span class="text-dark" >.</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Second</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Terms</h4>
+                                <p>Read and Accept Terms and Conditions <br><span class="text-dark"> .</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Third</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Pay</h4>
+                                <p>Pay USDT according to you want flash USDT in my wallet address.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Fourth</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Send id</h4>
+                                <p>Send your Transaction id , your wallet address and email.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Fifth</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>check Your Wallet</h4>
+                                <p>After our team send flash USDT in your Wallet<br><span class="text-dark"> .</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    Why Choose Us Area
+    ==============================-->
+    <div class="wcu-area-1 pt-130 pb-140 position-relative" id="feature">
+        <div class="bg-gradient-1">
+            <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+        </div>
+        <div class="container">
+            <div class="mb-25">
+                <div class="row gy-5">
+                    <div class="col-lg-7">
+                        <div class="section-title mb-0">
+                            <h2 class="title style2">Why You Choose Flasher to buying flash crypto?</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="wcu-thumb text-center alltuchtopdown">
+                            <img src="../user/img/update/normal/why_1-1.png" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-5 justify-content-between">
+                <div class="col-lg-6">
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-1.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">Instant Transfers</h4>
+                            <p class="feature-card-text">USDT delivered within 10-15 minutes.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-2.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">Trusted Platform</h4>
+                            <p class="feature-card-text">Over 1,000,000 satisfied buyers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-3.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">High Volume</h4>
+                            <p class="feature-card-text">Selling 1,000,000+</p>
+                            <p class="feature-card-text">Flash USDT daily.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    Intro Area
+    ==============================-->
+    <div class="pt-130 overflow-hidden bg-black2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="section-title mb-45">
+                        <h2 class="title style2">HOW FLASHER WORKS ?</h2>
+                        <p class="sec-text">We create Flash Crypto in large quantities with a vast supply. When you place an order, our team verifies the details and transfers your Flash USDT within 15 minutes With 20 active employees we ensure fast and reliable transactions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-xl-4">
+                    <div class="intro-wrap mt-xl-4">
+                        <h6 class="intro-wrap-title">What if my wallet address is wrong or the transfer fails?
+                        </h6>
+                        <p class="intro-wrap-text">We’ll notify you via email within 30 minutes and refund your USDT.</p>
+                    </div>
+                    <div class="intro-wrap">
+                        <h6 class="intro-wrap-title">Our Mission & Vision?
+                        </h6>
+                        <p class="intro-wrap-text">
+                            We aim to make Flash USDT accessible to everyone, ensuring fast, secure, and hassle-free transactions. Our vision is to support users who struggle to buy Flash USDT by providing a trusted, efficient, and customer-friendly platform with instant transfers and 24/7 support.</p>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="intro-thumb1 alltuchtopdown">
+                        <img src="../user/img/update/normal/intro_1-1.png" alt="img">
+                    </div>
+                    <div class="intro-wrap mt-50">
+                        <h6 class="intro-wrap-title">Why should I trust your platform?
+                        </h6>
+                        <p class="intro-wrap-text">We have over 1,000,000 buyers and process 60,000 to 70,000 transactions daily, ensuring fast and reliable transfers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!--==============================
+    Faq Area
+    ==============================-->
+    <div class="pt-140 pb-140 overflow-hidden">
+        <div class="container">
+            <div class="row gy-40 justify-content-between">
+                <div class="col-xl-4 text-xl-start">
+                    <div class="section-title mb-50">
+                        <h2 class="title style2">Features of our Flash USDT.</h2>
+                        <p class="sec-text">DO have any kind Of questions?
+                            We're here to help.</p>
+                    </div>
+                    <div class="faq-thumb mt-60">
+                        <img src="../user/img/update/normal/faq_1-1.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-xl-8">
+                    <div class="accordion-area accordion" id="faqAccordion">
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-1">
+                                <button class="accordion-button collapsed" type="button"><span class="number">1</span>Wallet to wallet transfer maximum 60.</button>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-2">
+                                <button class="accordion-button collapsed" type="button"><span class="number">2</span>Flash USDT expiry 140 to 160 days</button>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-3">
+                                <button class="accordion-button collapsed" type="button"><span class="number">3</span>You can resell your Flash back to us </button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-4">
+                                <button class="accordion-button collapsed" type="button"><span class="number">4</span> Flash USDT equivalent to real USDT</button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-5">
+                                <button class="accordion-button collapsed" type="button"><span class="number">5</span> ⁠Flash USDT cannot be used in P2P</button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-6">
+                                <button class="accordion-button collapsed" type="button"><span class="number">6</span> ⁠Not tradable</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-wrapper footer-layout1 position-relative">
+    <div class="bg-gradient-1">
+        <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+    </div>
+    <div class="container">
+        <div class="footer-menu-area">
+            <div class="row gy-4 justify-content-between align-items-center">
+                <div class="col-xl-5 col-lg-4">
+                    <div class="social-btn justify-content-center justify-content-lg-start">
+                        <a href="https://www.facebook.com/">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M10.0596 7.34522L15.8879 0.570312H14.5068L9.44607 6.45287L5.40411 0.570312H0.742188L6.85442 9.46578L0.742188 16.5703H2.12338L7.4676 10.3581L11.7362 16.5703H16.3981L10.0593 7.34522H10.0596ZM8.16787 9.54415L7.54857 8.65836L2.62104 1.61005H4.74248L8.71905 7.29827L9.33834 8.18405L14.5074 15.5779H12.386L8.16787 9.54449V9.54415Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-8 text-lg-end text-center">
+                    <ul class="footer-menu-list">
+                        <li>
+                            <a href="../index.html">
+                                HOME
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                OUR PROJECTS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                OUR TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                NEWS FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                DOCUMENTS
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-wrap text-center text-lg-start">
+        <div class="container">
+            <div class="row gy-3 justify-content-between align-items-center">
+                <div class="col-lg-6 align-self-center">
+                    <p class="copyright-text">Copyright © 2024 <a href="../index.html">Flasher.</a> All rights reserved.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <ul class="footer-links">
+                        <li>
+                            <a href="15.html#">
+                                Job & Career
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                Terms and Condition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15.html#">
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="../user/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="../user/js/bootstrap.min.js"></script>
+    <script src="../user/js/jquery.countdown.min.js"></script>
+    <script src="../user/js/jquery.appear.js"></script>
+    <script src="../user/js/slick.min.js"></script>
+    <script src="../user/js/ajax-form.js"></script>
+    <script src="../user/js/jquery.easing.js"></script>
+    <script src="../user/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../user/js/isotope.pkgd.min.js"></script>
+    <script src="../user/js/jquery.magnific-popup.min.js"></script>
+    <script src="../user/js/wow.min.js"></script>
+    <script src="../user/js/main.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#usdtCalBtn').click(function(){
+            var usdt = $('#usdt').val();
+            if(usdt < 1){
+                $('#errorMessage').show();
+                return false;
+            }
+            // Hide error message if validation passes
+            $('#errorMessage').hide();
+            // Show stock unavailable message for Polygon
+            $('#stockMessage').show();
+            $('#usdtCalBtn').prop('disabled', true).text('Out of Stock');
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,977 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Buy</title>
+    <meta name="description" content="IKO - ICO & Crypto Landing Page Template">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../user/img/favicon.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../user/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../user/css/animate.min.css">
+    <link rel="stylesheet" href="../user/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../user/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="../user/css/slick.css">
+    <link rel="stylesheet" href="../user/css/default.css">
+    <link rel="stylesheet" href="../user/css/style.css">
+    <link rel="stylesheet" href="../user/css/responsive.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
+      crossorigin="anonymous"
+    />
+        <style>
+        #smallText {
+            font-size: 12px; 
+            color: #fff;
+            position: absolute;
+            bottom: 55px;
+        }
+        #cardForm{
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(17, 25, 40, 0.75);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            position: relative;
+            /* bottom:10vh; */
+        }
+        #usdtImg{
+            width:100%;
+            display: flex;
+            justify-content: center;
+        }
+        #usdtImg > img{
+            position: relative;
+            bottom: 50px;
+            margin: auto;
+        }
+        
+        #copyText:focus{
+            box-shadow: none;
+            outline: none;
+            /* border: none; */
+        }
+        #copyBtn{
+            border-radius: 2px;
+            color: black;
+        }
+        #copyBtn:hover{
+            background-color: aqua;
+        }
+        #copyBtn::after{
+            display: none;
+        }
+        @media only screen and (max-width: 600px) {  
+           #cardForm{
+                top:70px;
+           }
+        }
+        #inactiveP{
+            position: fixed;
+            top:50vh;
+            width:100%;
+            text-align: center;
+            margin:auto;
+            z-index: 100;
+            color: red;
+            font-size: 20px;
+            background-color: #fff;
+        }
+        #disableBtn{
+            background-color: grey !important;
+        }
+        #disableBtn::after{
+            display: none;
+        }
+        .hero-wrapper{
+            padding-top: 150px !important;
+        }
+    </style>
+    <style>
+        .accordion-card .accordion-button:after{
+            content: "";
+        }
+        .brand-active2 .slick-slide{
+            height:100px;
+        }
+        .brand-active2 .slick-slide .brand-item{
+            height: 100%;
+        }
+        .brand-active2 .slick-slide .brand-item img{
+            padding: 0 15px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body class="home-purple-gradient">
+    <div id="preloader">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <!-- Preloader -->
+
+    <!-- Scroll-top -->
+    <button class="scroll-top scroll-to-target" data-target="html">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <!-- Scroll-top-end-->
+
+    <header id="header" class="header-layout1">
+    <div id="sticky-header" class="menu-area transparent-header">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="menu-wrap">
+                        <nav class="menu-nav">
+                            <div class="logo">
+                                <a href="../index.html"><img src="../user/img/logo/logo.png" style="height: 50px;" alt="Logo"></a>
+                            </div>
+                            <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                <ul class="navigation">
+                                    <li class="  menu-item-has-children"><a class="section-link" href="../index.html">Home</a></li>
+                                    <li><a href="../index.html#feature" class="section-link">Feature</a></li>
+                                    <li><a href="../index.html#roadMap" class="section-link">RoadMap</a></li>
+                                    <li class=" "><a href="../resale.html" class="section-link">Resale</a></li>
+                                    <li class=" "><a href="../operative.html" class="section-link">Operator</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+        <nav class="menu-box">
+            <div class="close-btn"><i class="fas fa-times"></i></div>
+            <div class="nav-logo">
+                <a href="../index.html"><img src="../user/img/logo/logo.png" style="height: 35px;" alt="Logo"></a>
+            </div>
+            <div class="menu-outer">
+                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+            </div>
+            <div class="social-links">
+                <ul class="clearfix list-wrap">
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                    <li>
+                        <a href="https://x.com/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M10.0596 7.34522L15.8879 0.570312H14.5068L9.44607 6.45287L5.40411 0.570312H0.742188L6.85442 9.46578L0.742188 16.5703H2.12338L7.4676 10.3581L11.7362 16.5703H16.3981L10.0593 7.34522H10.0596ZM8.16787 9.54415L7.54857 8.65836L2.62104 1.61005H4.74248L8.71905 7.29827L9.33834 8.18405L14.5074 15.5779H12.386L8.16787 9.54449V9.54415Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="menu-backdrop"></div>
+    <!-- End Mobile Menu -->
+</header>    <main>
+    <div class="hero-wrapper hero-2">
+        <div class="hero-bg-gradient1"></div>
+        <div class="hero-bg-gradient2"></div>
+        <div class="hero-gradient-ball alltuchtopdown"></div>
+        <div class="ripple-shape">
+            <span class="ripple-1"></span>
+            <span class="ripple-2"></span>
+            <span class="ripple-3"></span>
+            <span class="ripple-4"></span>
+            <span class="ripple-5"></span>
+        </div>
+        <div class="row">
+            <div id="cardForm" class="card m-auto col-9 col-md-6">
+                <div id="usdtImg">
+                    <img id="img" src="../user/img/categories/17438921711378386741.png" height="99" width="99" class="rounded-circle" alt="">
+                </div>
+                <div class="container mt-4">
+                    <div class="input-group">
+                        <p>For 1000 Flash USDT transafer 33.33 USDT to our wallet address
+                        </p>
+                    </div>
+                </div>
+                <!-- Payment Gateway Integration -->
+                <div class="container mt-4 pb-2">
+                    <div class="alert alert-info">
+                        <strong>Secure Payment:</strong> Complete your payment securely using our integrated payment gateway.
+                    </div>
+                </div>
+                <div class="card-body">
+                                        <form action="#" method="POST" id="transaction-form">
+                        <input type="hidden" name="_token" value="JEvWZ51xmD056YeWEpDQJRkUCpnNsERwqKSrk8VR" autocomplete="off">                                                <div class="mb-3 pb-2">
+                            <label for="wallet_address" class="form-label">Your Wallet Address to receive flash</label>
+                            <input type="text" class="form-control" value="" name="wallet_address" id="wallet_address" placeholder="Wallet address" required>
+                                                    </div>
+                        <div class="mb-3 pb-2">
+                            <label for="amount" class="form-label">Amount to Pay (USDT)</label>
+                            <input type="text" class="form-control" value="33.33" name="amount" id="amount" placeholder="Enter USDT" readonly>
+                            <small class="form-text text-muted">Amount: <span id="amount-display">33.33</span> USDT for <span id="flash-amount">1000</span> Flash USDT</small>
+                                                    </div>
+                        <div class="mb-3 pb-2">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" value="" name="email" id="email" placeholder="Enter your email" required>
+                                                    </div>
+                        <!-- Payment Gateway Button -->
+                        <div class="text-center">
+                            <button type="button" id="pay-button" class="btn btn-success btn-lg" style="width: 100%; padding: 18px; font-size: 18px; font-weight: 600; border-radius: 10px; background: linear-gradient(135deg, #28a745, #20c997); border: none; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
+                                <i class="fas fa-credit-card"></i> Pay <span id="button-amount">33.33</span> USDT Securely <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <small class="form-text text-muted mt-2">
+                                <i class="fas fa-shield-alt"></i> Powered by OxaPay secure payment gateway
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    our Brand Area 
+    ==============================--> <br><br>
+    <div class="brand-area2">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-lg-12">
+                    <div class="brand-title text-center">
+                        <h6 class="title">Our top Partner</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-item-wrap style2">
+                <div class="row g-0 brand-active2">
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img01.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img02.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img03.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img04.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img05.png" alt="">
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img07.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brand-item">
+                            <img src="../user/img/brand/brand_img04.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    RoadMap Area
+    ==============================-->
+    <div class="pt-130 pb-140 overflow-hidden bg-black2 position-relative z-index-common" id="roadMap">
+        <div class="bg-gradient-2">
+            <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+        </div>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-sm-8">
+                    <div class="section-title mb-50">
+                        <h2 class="title style2">Our Roadmap</h2>
+                    </div>
+                </div>
+                <div class="col-sm-auto">
+                    <div class="icon-box">
+                        <button class="slider-arrow prev-btn default"><i class="fas fa-arrow-left"></i></button>
+                        <button class="slider-arrow next-btn default"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid p-0">
+            <div class="slider-area position-relative">
+                <div class="row roadMap-active2 roadmap-slider1">
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">First</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Select USDT</h4>
+                                <p>Select which USDT you want <br> <span class="text-dark" >.</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Second</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Terms</h4>
+                                <p>Read and Accept Terms and Conditions <br><span class="text-dark"> .</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Third</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Pay</h4>
+                                <p>Pay USDT according to you want flash USDT in my wallet address.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Fourth</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>Send id</h4>
+                                <p>Send your Transaction id , your wallet address and email.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="roadmap-item">
+                            <span class="roadmap-title">Fifth</span>
+                            <div class="roadmap-content">
+                                <h4 class="title"><span class="dot"></span>check Your Wallet</h4>
+                                <p>After our team send flash USDT in your Wallet<br><span class="text-dark"> .</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    Why Choose Us Area
+    ==============================-->
+    <div class="wcu-area-1 pt-130 pb-140 position-relative" id="feature">
+        <div class="bg-gradient-1">
+            <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+        </div>
+        <div class="container">
+            <div class="mb-25">
+                <div class="row gy-5">
+                    <div class="col-lg-7">
+                        <div class="section-title mb-0">
+                            <h2 class="title style2">Why You Choose Flasher to buying flash crypto?</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="wcu-thumb text-center alltuchtopdown">
+                            <img src="../user/img/update/normal/why_1-1.png" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-5 justify-content-between">
+                <div class="col-lg-6">
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-1.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">Instant Transfers</h4>
+                            <p class="feature-card-text">USDT delivered within 10-15 minutes.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-2.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">Trusted Platform</h4>
+                            <p class="feature-card-text">Over 1,000,000 satisfied buyers.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-card-icon">
+                            <img src="../user/img/update/icon/feature-icon1-3.svg" alt="img">
+                        </div>
+                        <div class="feature-card-details">
+                            <h4 class="feature-card-title">High Volume</h4>
+                            <p class="feature-card-text">Selling 1,000,000+</p>
+                            <p class="feature-card-text">Flash USDT daily.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--==============================
+    Intro Area
+    ==============================-->
+    <div class="pt-130 overflow-hidden bg-black2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="section-title mb-45">
+                        <h2 class="title style2">HOW FLASHER WORKS ?</h2>
+                        <p class="sec-text">We create Flash Crypto in large quantities with a vast supply. When you place an order, our team verifies the details and transfers your Flash USDT within 15 minutes With 20 active employees we ensure fast and reliable transactions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-xl-4">
+                    <div class="intro-wrap mt-xl-4">
+                        <h6 class="intro-wrap-title">What if my wallet address is wrong or the transfer fails?
+                        </h6>
+                        <p class="intro-wrap-text">We'll notify you via email within 30 minutes and refund your USDT.</p>
+                    </div>
+                    <div class="intro-wrap">
+                        <h6 class="intro-wrap-title">Our Mission & Vision?
+                        </h6>
+                        <p class="intro-wrap-text">
+                            We aim to make Flash USDT accessible to everyone, ensuring fast, secure, and hassle-free transactions. Our vision is to support users who struggle to buy Flash USDT by providing a trusted, efficient, and customer-friendly platform with instant transfers and 24/7 support.</p>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="intro-thumb1 alltuchtopdown">
+                        <img src="../user/img/update/normal/intro_1-1.png" alt="img">
+                    </div>
+                    <div class="intro-wrap mt-50">
+                        <h6 class="intro-wrap-title">Why should I trust your platform?
+                        </h6>
+                        <p class="intro-wrap-text">We have over 1,000,000 buyers and process 60,000 to 70,000 transactions daily, ensuring fast and reliable transfers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!--==============================
+    Faq Area
+    ==============================-->
+    <div class="pt-140 pb-140 overflow-hidden">
+        <div class="container">
+            <div class="row gy-40 justify-content-between">
+                <div class="col-xl-4 text-xl-start">
+                    <div class="section-title mb-50">
+                        <h2 class="title style2">Features of our Flash USDT.</h2>
+                        <p class="sec-text">DO have any kind Of questions?
+                            We're here to help.</p>
+                    </div>
+                    <div class="faq-thumb mt-60">
+                        <img src="../user/img/update/normal/faq_1-1.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-xl-8">
+                    <div class="accordion-area accordion" id="faqAccordion">
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-1">
+                                <button class="accordion-button collapsed" type="button"><span class="number">1</span>Wallet to wallet transfer maximum 60.</button>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-2">
+                                <button class="accordion-button collapsed" type="button"><span class="number">2</span>Flash USDT expiry 140 to 160 days</button>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-3">
+                                <button class="accordion-button collapsed" type="button"><span class="number">3</span>You can resell your Flash back to us </button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-4">
+                                <button class="accordion-button collapsed" type="button"><span class="number">4</span> Flash USDT equivalent to real USDT</button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-5">
+                                <button class="accordion-button collapsed" type="button"><span class="number">5</span> ⁠Flash USDT cannot be used in P2P</button>
+                            </div>
+                        </div>
+
+                        <div class="accordion-card">
+                            <div class="accordion-header" id="collapse-item-6">
+                                <button class="accordion-button collapsed" type="button"><span class="number">6</span> ⁠Not tradable</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-wrapper footer-layout1 position-relative">
+    <div class="bg-gradient-1">
+        <img src="../user/img/update/bg/bg-gradient1-1.jpg" alt="img">
+    </div>
+    <div class="container">
+        <div class="footer-menu-area">
+            <div class="row gy-4 justify-content-between align-items-center">
+                <div class="col-xl-5 col-lg-4">
+                    <div class="social-btn justify-content-center justify-content-lg-start">
+                        <a href="https://www.facebook.com/">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path
+                                    d="M10.0596 7.34522L15.8879 0.570312H14.5068L9.44607 6.45287L5.40411 0.570312H0.742188L6.85442 9.46578L0.742188 16.5703H2.12338L7.4676 10.3581L11.7362 16.5703H16.3981L10.0593 7.34522H10.0596ZM8.16787 9.54415L7.54857 8.65836L2.62104 1.61005H4.74248L8.71905 7.29827L9.33834 8.18405L14.5074 15.5779H12.386L8.16787 9.54449V9.54415Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-8 text-lg-end text-center">
+                    <ul class="footer-menu-list">
+                        <li>
+                            <a href="../index.html">
+                                HOME
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                OUR PROJECTS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                OUR TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                NEWS FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                DOCUMENTS
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-wrap text-center text-lg-start">
+        <div class="container">
+            <div class="row gy-3 justify-content-between align-items-center">
+                <div class="col-lg-6 align-self-center">
+                    <p class="copyright-text">Copyright © 2024 <a href="../index.html">Flasher.</a> All rights reserved.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#">
+                                Job & Career
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Terms and Condition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Help Center
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="../user/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="../user/js/bootstrap.min.js"></script>
+    <script src="../user/js/jquery.countdown.min.js"></script>
+    <script src="../user/js/jquery.appear.js"></script>
+    <script src="../user/js/slick.min.js"></script>
+    <script src="../user/js/ajax-form.js"></script>
+    <script src="../user/js/jquery.easing.js"></script>
+    <script src="../user/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../user/js/isotope.pkgd.min.js"></script>
+    <script src="../user/js/jquery.magnific-popup.min.js"></script>
+    <script src="../user/js/wow.min.js"></script>
+    <script src="../user/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function(){
+            // Copy Btn Section start
+                var copyBtn = $('#copyBtn');
+                copyBtn.click(function() {
+                    var copyText = $("#copyText").val();
+
+                    Swal.fire({
+                    icon: "success",
+                    title: "copy",
+                    showConfirmButton: false,
+                    timer: 1000
+                    });
+                    
+                    navigator.clipboard.writeText(copyText).then(function() {
+                    }).catch(function(err) {
+                        console.error('Error copying text: ', err);
+                    });
+                });
+            // Copy Btn Section end
+            
+            // Update amount based on URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount') || '1000';
+            const transferAmount = (parseFloat(amount) / 30).toFixed(2);
+            
+            // Update the display text
+            $('p').text(`For ${amount} Flash USDT transafer ${transferAmount} USDT to our wallet address`);
+            
+            // Update the amount input field
+            $('#amount').val(transferAmount);
+            
+            // Update the display text with correct amounts
+            $('#amount-display').text(transferAmount);
+            $('#flash-amount').text(amount);
+            
+            // Update the payment button text with correct amount
+            $('#button-amount').text(transferAmount);
+            
+            // OxaPay Payment Gateway Integration
+            $('#pay-button').click(function() {
+                const walletAddress = $('#wallet_address').val();
+                const email = $('#email').val();
+                const amount = $('#amount').val();
+                
+                // Validate form
+                if (!walletAddress || !email) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                
+                // Show loading state
+                $(this).html('<i class="fas fa-spinner fa-spin"></i> Processing...').prop('disabled', true);
+                
+                // Create OxaPay payment with the correct amount from input field
+                const actualAmount = parseFloat($('#amount').val());
+                createOxaPayPayment(actualAmount, walletAddress, email);
+            });
+        });
+        
+        // OxaPay Configuration
+        const OXAPAY_CONFIG = {
+            API_URL: 'https://api.oxapay.com/v1/payment/white-label',
+            API_KEY: '4MWPM6-VX5YQN-EK9JAP-0IDZ6A',
+            CURRENCY: 'USD',
+            PAY_CURRENCY: 'TRX',
+            NETWORK: 'TRC20',
+            TO_CURRENCY: 'USDT',
+            LIFETIME: 60,
+            FEE_PAID_BY_PAYER: 1,
+            UNDER_PAID_COVERAGE: 20,
+            AUTO_WITHDRAWAL: false
+        };
+
+        // Create OxaPay payment
+        async function createOxaPayPayment(amount, walletAddress, email) {
+            console.log('🚀 Creating OxaPay payment for amount:', amount, 'Wallet:', walletAddress, 'Email:', email);
+            
+            try {
+                const orderId = 'FLASH_' + Date.now();
+                
+                const response = await fetch('https://api.oxapay.com/v1/payment/invoice', {
+                    method: 'POST',
+                    headers: {
+                        'merchant_api_key': OXAPAY_CONFIG.API_KEY,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: amount,
+                        currency: 'USD',
+                        pay_currency: 'TRX',
+                        network: 'TRC20',
+                        lifetime: 60,
+                        fee_paid_by_payer: 1,
+                        under_paid_coverage: 20,
+                        to_currency: 'USDT',
+                        auto_withdrawal: false,
+                        callback_url: 'https://flashusdt-nu.vercel.app/callback',
+                        return_url: 'https://flashusdt-nu.vercel.app/success',
+                        email: email,
+                        order_id: orderId,
+                        description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ OxaPay API Error:', response.status, errorText);
+                    throw new Error(`Payment failed: ${errorText}`);
+                }
+                
+                const paymentData = await response.json();
+                console.log('✅ OxaPay payment created:', paymentData);
+                
+                if (paymentData.status === 200 && paymentData.data) {
+                    const payLink = paymentData.data.payment_url || `https://pay.oxapay.com/${paymentData.data.track_id}`;
+                    
+                    // Store payment data for later reference
+                    window.currentPaymentData = {
+                        ...paymentData.data,
+                        walletAddress: walletAddress,
+                        email: email,
+                        orderId: orderId
+                    };
+                    
+                    // Open OxaPay payment page
+                    window.open(payLink, '_blank');
+                    
+                    // Show success message
+                    alert('Payment page opened! Complete your payment in the new tab.\n\nAfter payment, Flash USDT will be sent to:\n' + walletAddress);
+                    
+                    // Start checking payment status
+                    startPaymentStatusCheck(paymentData.data.track_id);
+                    
+                } else {
+                    throw new Error(paymentData.message || 'Payment creation failed');
+                }
+                
+            } catch (error) {
+                console.error('❌ OxaPay payment creation failed:', error);
+                alert('Payment failed: ' + error.message);
+            } finally {
+                // Reset button
+                $('#pay-button').html('<i class="fas fa-credit-card"></i> Pay ' + amount + ' USDT Securely').prop('disabled', false);
+            }
+        }
+
+        // Start checking payment status
+        function startPaymentStatusCheck(trackId) {
+            console.log('🔄 Starting payment status check for track ID:', trackId);
+            
+            const checkInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`https://api.oxapay.com/v1/payment/status`, {
+                        method: 'POST',
+                        headers: {
+                            'merchant_api_key': OXAPAY_CONFIG.API_KEY,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            track_id: trackId
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        const statusData = await response.json();
+                        console.log('📊 Payment status:', statusData);
+                        
+                        if (statusData.status === 200 && statusData.data) {
+                            const paymentStatus = statusData.data.status;
+                            
+                            if (paymentStatus === 'Paid') {
+                                clearInterval(checkInterval);
+                                showPaymentSuccess(statusData.data);
+                            } else if (paymentStatus === 'Failed' || paymentStatus === 'Expired') {
+                                clearInterval(checkInterval);
+                                showPaymentFailed(statusData.data);
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.log('Status check error:', error);
+                }
+            }, 5000); // Check every 5 seconds
+            
+            // Stop checking after 10 minutes
+            setTimeout(() => {
+                clearInterval(checkInterval);
+            }, 600000);
+        }
+
+        // Show payment success
+        function showPaymentSuccess(paymentData) {
+            console.log('✅ Payment successful!', paymentData);
+            
+            const walletAddress = window.currentPaymentData?.walletAddress || 'N/A';
+            const email = window.currentPaymentData?.email || 'N/A';
+            const amount = paymentData.amount || 'N/A';
+            const trackId = paymentData.track_id || 'N/A';
+            
+            // Send confirmation email
+            sendConfirmationEmail(email, walletAddress, amount, trackId);
+            
+            // Send Telegram notification
+            sendTelegramNotification(walletAddress, amount, trackId);
+            
+            alert(`🎉 Payment Successful!\n\nAmount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}\nTrack ID: ${paymentData.track_id}\nStatus: ${paymentData.status}\n\nFlash USDT will be sent to: ${walletAddress}\nConfirmation email sent to: ${email}`);
+        }
+
+        // Send confirmation email
+        async function sendConfirmationEmail(email, walletAddress, amount, trackId) {
+            try {
+                console.log('📧 Sending confirmation email to:', email);
+                
+                const emailData = {
+                    to: email,
+                    subject: '🎉 Flash USDT Purchase Confirmed!',
+                    html: `
+                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 30px; border-radius: 10px; text-align: center;">
+                                <h1 style="margin: 0; font-size: 28px;">🎉 Payment Successful!</h1>
+                                <p style="margin: 10px 0 0 0; font-size: 16px;">Your Flash USDT purchase has been confirmed</p>
+                            </div>
+                            
+                            <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                                <h2 style="color: #333; margin-top: 0;">Transaction Details</h2>
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Amount Paid:</td>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd;">$${amount} USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Flash USDT Amount:</td>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd;">${(amount * 30).toFixed(0)} Flash USDT</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd; font-weight: bold;">Track ID:</td>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd; font-family: monospace;">${trackId}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px; font-weight: bold;">Delivery Address:</td>
+                                        <td style="padding: 10px; font-family: monospace; word-break: break-all;">${walletAddress}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; border: 1px solid #c3e6cb;">
+                                <h3 style="margin-top: 0;">✅ Next Steps</h3>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li>Flash USDT will be sent to your wallet within 15 minutes</li>
+                                    <li>You will receive another email once the transfer is complete</li>
+                                    <li>Keep this email as your receipt</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 30px; color: #666; font-size: 14px;">
+                                <p>Thank you for choosing Flasherr!</p>
+                                <p>If you have any questions, please contact our support team.</p>
+                            </div>
+                        </div>
+                    `
+                };
+                
+                // Using EmailJS for email sending
+                if (typeof emailjs !== 'undefined') {
+                    await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData);
+                    console.log('✅ Confirmation email sent successfully');
+                } else {
+                    console.log('📧 EmailJS not available, would send email:', emailData);
+                }
+                
+            } catch (error) {
+                console.error('❌ Failed to send confirmation email:', error);
+            }
+        }
+
+        // Send Telegram notification
+        async function sendTelegramNotification(walletAddress, amount, trackId) {
+            try {
+                console.log('📱 Sending Telegram notification');
+                
+                const telegramMessage = `🎉 *New Flash USDT Purchase!*
+
+💰 *Amount:* $${amount} USD
+🪙 *Flash USDT:* ${(amount * 30).toFixed(0)} Flash USDT
+🆔 *Track ID:* ${trackId}
+📍 *Wallet:* ${walletAddress}
+
+✅ Payment confirmed and Flash USDT will be sent within 15 minutes.`;
+
+                // Using Telegram Bot API
+                const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
+                const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
+                
+                if (botToken !== 'YOUR_BOT_TOKEN' && chatId !== 'YOUR_CHAT_ID') {
+                    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: telegramMessage,
+                            parse_mode: 'Markdown'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        console.log('✅ Telegram notification sent successfully');
+                    } else {
+                        console.error('❌ Failed to send Telegram notification');
+                    }
+                } else {
+                    console.log('📱 Telegram bot not configured, would send:', telegramMessage);
+                }
+                
+            } catch (error) {
+                console.error('❌ Failed to send Telegram notification:', error);
+            }
+        }
+
+        // Show payment failed
+        function showPaymentFailed(paymentData) {
+            console.log('❌ Payment failed!', paymentData);
+            
+            alert(`❌ Payment ${paymentData.status}\n\nAmount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}\nTrack ID: ${paymentData.track_id}\n\nPlease try again or contact support.`);
+        }
+    </script>
+    
+    <!-- Telegram Notifications Script -->
+    <script src="../user/js/telegram-notifications.js"></script>
+</body>
+</html>
