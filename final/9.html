@@ -940,15 +940,10 @@
             
             // OxaPay Payment Gateway Integration
             $('#pay-button').click(function() {
-                console.log('🔘 Pay button clicked!');
                 const walletAddress = $('#wallet_address').val();
                 const email = $('#email').val();
                 const amount = $('#amount').val();
                 const flashAmount = $('#flash-amount').text();
-                
-                console.log('📝 Captured form data:', {
-                    walletAddress, email, amount, flashAmount
-                });
                 
                 // Store user data globally for later use in notifications
                 window.userPaymentData = {
@@ -1016,7 +1011,7 @@
                         to_currency: 'USDT',
                         auto_withdrawal: false,
                         callback_url: 'https://flashusdt-nu.vercel.app/callback',
-                        return_url: 'https://flashusdt-nu.vercel.app/final/9.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email),
+                        return_url: 'https://flashusdt-nu.vercel.app/final/9.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email) + '&wallet_address=' + encodeURIComponent(walletAddress),
                         email: email,
                         order_id: orderId,
                         description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
@@ -1228,12 +1223,13 @@
                 const amountPaid = urlParams.get('amount_paid');
                 const email = urlParams.get('email');
                 const flashAmount = urlParams.get('amount');
+                const walletAddress = urlParams.get('wallet_address');
                 
                 // Show confirmation popup
                 showPaymentConfirmationPopup(transactionId, amountPaid, email, flashAmount);
                 
                 // Send notifications
-                sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount);
+                sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount, walletAddress);
                 
                 // Clean URL (remove parameters)
                 const cleanUrl = window.location.origin + window.location.pathname;
@@ -1314,7 +1310,7 @@
         }
         
         // Send payment success notifications using existing system
-        async function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount) {
+        async function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount, walletAddress) {
             console.log('🚀 sendPaymentSuccessNotifications called with:', {
                 transactionId, amountPaid, email, flashAmount
             });
@@ -1338,7 +1334,7 @@
                 actualEmail = email || $('#email').val() || urlParams.get('email') || 'customer@example.com';
                 actualAmount = amountPaid || $('#amount').val() || urlParams.get('amount_paid') || 'N/A';
                 actualFlashAmount = flashAmount || $('#flash-amount').text() || urlParams.get('amount') || 'N/A';
-                actualWalletAddress = $('#wallet_address').val() || urlParams.get('wallet_address') || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU';
+                actualWalletAddress = walletAddress || $('#wallet_address').val() || urlParams.get('wallet_address') || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU';
                 actualNetwork = 'TRON (TRC20)';
             }
             

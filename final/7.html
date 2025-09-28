@@ -1010,7 +1010,7 @@
                         to_currency: 'USDT',
                         auto_withdrawal: false,
                         callback_url: 'https://flashusdt-nu.vercel.app/callback',
-                        return_url: 'https://flashusdt-nu.vercel.app/final/7.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email),
+                        return_url: 'https://flashusdt-nu.vercel.app/final/7.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email) + '&wallet_address=' + encodeURIComponent(walletAddress),
                         email: email,
                         order_id: orderId,
                         description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
@@ -1218,11 +1218,17 @@
             const paymentSuccess = urlParams.get('payment_success');
             
             if (paymentSuccess === 'true') {
+                const transactionId = urlParams.get('transaction_id');
+                const amountPaid = urlParams.get('amount_paid');
+                const email = urlParams.get('email');
+                const flashAmount = urlParams.get('amount');
+                const walletAddress = urlParams.get('wallet_address');
+                
                 // Show confirmation popup
-                showPaymentConfirmationPopup();
+                showPaymentConfirmationPopup(transactionId, amountPaid, email, flashAmount);
                 
                 // Send notifications
-                sendPaymentSuccessNotifications();
+                sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount, walletAddress);
                 
                 // Clean URL (remove parameters)
                 const cleanUrl = window.location.origin + window.location.pathname;
@@ -1304,7 +1310,7 @@
         }
         
         // Send payment success notifications using existing system
-        async function sendPaymentSuccessNotifications() {
+        async function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount, walletAddress) {
             // Use stored user data first, then fallback to other sources
             let actualEmail, actualAmount, actualFlashAmount, actualWalletAddress, actualNetwork;
             
@@ -1321,7 +1327,7 @@
                 actualEmail = $('#email').val() || urlParams.get('email') || 'customer@example.com';
                 actualAmount = $('#amount').val() || urlParams.get('amount_paid') || 'N/A';
                 actualFlashAmount = $('#flash-amount').text() || urlParams.get('amount') || 'N/A';
-                actualWalletAddress = $('#wallet_address').val() || urlParams.get('wallet_address') || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU';
+                actualWalletAddress = walletAddress || $('#wallet_address').val() || urlParams.get('wallet_address') || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU';
                 actualNetwork = 'ETH (ERC20)';
             }
             
