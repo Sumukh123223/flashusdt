@@ -329,7 +329,7 @@
                 <i class="fas fa-check"></i>
             </div>
             <h2 class="popup-title">Payment Confirmed!</h2>
-            <p class="popup-message">
+            <p class="popup-message" id="popup-message">
                 Thank you for buying Flash USDT for Flasher!<br><br>
                 Your Flash USDT transfer will be completed to your provided wallet within 15 minutes.<br><br>
                 We will update you via your provided email in case of any issues. If any errors occur, we'll contact you through your given email.<br><br>
@@ -1094,6 +1094,21 @@
         
         // Show payment confirmation popup
         function showPaymentConfirmationPopup(transactionId, amountPaid, email, flashAmount) {
+            // Get actual payment values
+            const urlParams = new URLSearchParams(window.location.search);
+            const actualFlashAmount = urlParams.get('amount') || $('#flash-amount').text() || flashAmount || '1000';
+            const actualUsdtAmount = $('#amount').val() || $('#amount-display').text() || amountPaid || '33.33';
+            
+            // Update popup message with actual values
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.innerHTML = `
+                Thank you for buying Flash USDT for Flasher!<br><br>
+                For ${actualFlashAmount} Flash USDT transfer ${actualUsdtAmount} USDT to our wallet address.<br><br>
+                Your Flash USDT transfer will be completed to your provided wallet within 15 minutes.<br><br>
+                We will update you via your provided email in case of any issues. If any errors occur, we'll contact you through your given email.<br><br>
+                Thank you for choosing Flasher!
+            `;
+            
             document.getElementById('paymentConfirmationPopup').style.display = 'flex';
         }
         
