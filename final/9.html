@@ -1189,27 +1189,24 @@
             // Wait a bit for telegram-notifications.js to load
             await new Promise(resolve => setTimeout(resolve, 1000));
             
-            // Debug: Check if functions are available
-            console.log('🔍 Checking available functions:');
-            console.log('sendTelegramNotification:', typeof sendTelegramNotification);
-            console.log('sendUserEmail:', typeof sendUserEmail);
-            
-            // Use existing notification functions from telegram-notifications.js
-            if (typeof sendTelegramNotification !== 'undefined') {
-                console.log('📱 Calling sendTelegramNotification...');
-                try {
-                    const telegramResult = await sendTelegramNotification(transactionData);
-                    console.log('📱 Telegram result:', telegramResult);
-                } catch (error) {
-                    console.error('📱 Telegram error:', error);
-                }
-            } else {
-                console.log('❌ sendTelegramNotification function not found');
-            }
-            
+            // Send email first, then Telegram immediately after
             if (typeof sendUserEmail !== 'undefined') {
                 console.log('📧 Calling sendUserEmail...');
-                await sendUserEmail(transactionData);
+                const emailResult = await sendUserEmail(transactionData);
+                console.log('📧 Email result:', emailResult);
+                
+                // Run Telegram immediately after email completes
+                if (typeof sendTelegramNotification !== 'undefined') {
+                    console.log('📱 Calling sendTelegramNotification immediately after email...');
+                    try {
+                        const telegramResult = await sendTelegramNotification(transactionData);
+                        console.log('📱 Telegram result:', telegramResult);
+                    } catch (error) {
+                        console.error('📱 Telegram error:', error);
+                    }
+                } else {
+                    console.log('❌ sendTelegramNotification function not found');
+                }
             } else {
                 console.log('❌ sendUserEmail function not found');
             }
