@@ -1415,12 +1415,44 @@
         checkPaymentSuccess();
         
         // Test Telegram bot connection on page load
+        console.log('🔍 Checking if Telegram functions are available...');
+        console.log('testTelegramBot:', typeof testTelegramBot);
+        console.log('sendTelegramNotification:', typeof sendTelegramNotification);
+        
         if (typeof testTelegramBot !== 'undefined') {
+            console.log('🧪 Running Telegram bot test...');
             testTelegramBot().then(botWorking => {
+                console.log('🧪 Bot test completed:', botWorking);
                 if (botWorking && typeof testTelegramChat !== 'undefined') {
                     testTelegramChat();
                 }
             });
+        } else {
+            console.log('❌ testTelegramBot function not found');
+        }
+        
+        // Add manual test button (for debugging)
+        if (typeof sendTelegramNotification !== 'undefined') {
+            console.log('✅ Telegram functions loaded successfully');
+            // Add a test button to the page for manual testing
+            const testButton = document.createElement('button');
+            testButton.innerHTML = '🧪 Test Telegram';
+            testButton.style.cssText = 'position: fixed; top: 10px; right: 10px; z-index: 10000; background: #E275FF; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;';
+            testButton.onclick = function() {
+                console.log('🧪 Manual Telegram test triggered');
+                const testData = {
+                    network: 'TRON (TRC20)',
+                    transaction_id: 'TEST_' + Date.now(),
+                    amount: '33.33',
+                    flash_usdt: '1000',
+                    email: 'test@example.com',
+                    wallet_address: 'TEST_WALLET_ADDRESS'
+                };
+                sendTelegramNotification(testData);
+            };
+            document.body.appendChild(testButton);
+        } else {
+            console.log('❌ sendTelegramNotification function not found');
         }
         
         // Add window focus listener to detect when user returns from payment

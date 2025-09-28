@@ -1,6 +1,23 @@
 // Telegram Bot Configuration
+console.log('🚀 telegram-notifications.js loaded successfully!');
+console.log('📱 Script version: 2.0 - Enhanced debugging');
+
 const TELEGRAM_BOT_TOKEN = '8240287573:AAE4NTxWAmBB0GezTFnK-rrMIr5j5BYxb1c'; // Replace with your bot token
 const TELEGRAM_CHAT_ID = '8191508290'; // Replace with your chat ID
+
+console.log('🔧 Telegram Bot Token loaded:', TELEGRAM_BOT_TOKEN ? 'YES' : 'NO');
+console.log('🔧 Telegram Chat ID loaded:', TELEGRAM_CHAT_ID ? 'YES' : 'NO');
+
+// Immediate test when script loads
+console.log('🧪 Running immediate Telegram test...');
+testTelegramBot().then(result => {
+    console.log('🧪 Immediate bot test result:', result);
+    if (result) {
+        testTelegramChat().then(chatResult => {
+            console.log('🧪 Immediate chat test result:', chatResult);
+        });
+    }
+});
 
 // Test Telegram bot connection
 async function testTelegramBot() {
