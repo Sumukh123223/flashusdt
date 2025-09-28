@@ -513,113 +513,53 @@
                                                     </div>
                         <!-- Modern Payment Gateway Button -->
                         <div class="text-center">
-                            <button type="button" id="pay-button" class="btn btn-lg modern-pay-button" style="
+                            <button type="button" id="pay-button" class="btn btn-lg professional-pay-button" style="
                                 width: 100%; 
-                                padding: 24px 32px; 
-                                font-size: 20px; 
-                                font-weight: 600; 
-                                border-radius: 25px; 
-                                background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
-                                border: 3px solid #ff4757;
-                                box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+                                padding: 20px 30px; 
+                                font-size: 18px; 
+                                font-weight: 700; 
+                                border-radius: 15px; 
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                border: none; 
+                                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
                                 color: white;
-                                text-transform: none;
-                                letter-spacing: 0.5px;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
                                 position: relative;
                                 overflow: hidden;
-                                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                                transition: all 0.3s ease;
                                 cursor: pointer;
-                                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             ">
-                                <span class="button-content" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 12px;">
-                                    <div class="icon-wrapper" style="
-                                        width: 32px; 
-                                        height: 32px; 
-                                        background: rgba(255,255,255,0.2); 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center;
-                                        backdrop-filter: blur(10px);
-                                    ">
-                                        <i class="fas fa-bolt" style="font-size: 16px; color: #fff;"></i>
-                                    </div>
-                                    <span style="font-size: 22px; font-weight: 700;">Pay Now</span>
-                                    <div class="arrow-wrapper" style="
-                                        width: 28px; 
-                                        height: 28px; 
-                                        background: rgba(255,255,255,0.25); 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center;
-                                        transition: transform 0.3s ease;
-                                    ">
-                                        <i class="fas fa-arrow-right" style="font-size: 14px;"></i>
-                                    </div>
+                                <span class="button-content" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                    <i class="fas fa-shield-alt" style="font-size: 20px;"></i>
+                                    <span>Pay <span id="button-amount">33.33</span> USDT</span>
+                                    <i class="fas fa-lock" style="font-size: 16px;"></i>
                                 </span>
-                                <div class="button-glow" style="
+                                <div class="button-shine" style="
                                     position: absolute;
-                                    top: -50%;
-                                    left: -50%;
-                                    width: 200%;
-                                    height: 200%;
-                                    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-                                    opacity: 0;
-                                    transition: opacity 0.3s ease;
-                                "></div>
-                                <div class="button-ripple" style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    width: 0;
-                                    height: 0;
-                                    background: rgba(255,255,255,0.3);
-                                    border-radius: 50%;
-                                    transform: translate(-50%, -50%);
-                                    transition: width 0.6s ease, height 0.6s ease;
+                                    top: 0;
+                                    left: -100%;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                                    transition: left 0.5s;
                                 "></div>
                             </button>
                             
-                            <!-- Modern Security Badge -->
-                            <div class="modern-security-badge mt-4" style="
+                            <!-- Security Badge -->
+                            <div class="security-badge mt-3" style="
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                gap: 12px;
-                                color: #666;
-                                font-size: 15px;
+                                gap: 8px;
+                                color: #6c757d;
+                                font-size: 14px;
                                 font-weight: 500;
-                                background: rgba(255,255,255,0.1);
-                                padding: 12px 20px;
-                                border-radius: 20px;
-                                backdrop-filter: blur(10px);
-                                border: 1px solid rgba(255,255,255,0.2);
                             ">
-                                <div class="security-icon" style="
-                                    width: 24px; 
-                                    height: 24px; 
-                                    background: linear-gradient(45deg, #00d4aa, #00b894); 
-                                    border-radius: 50%; 
-                                    display: flex; 
-                                    align-items: center; 
-                                    justify-content: center;
-                                ">
-                                    <i class="fas fa-shield-check" style="font-size: 12px; color: white;"></i>
-                                </div>
-                                <span>Bank-Level Security</span>
-                                <div class="security-icon" style="
-                                    width: 24px; 
-                                    height: 24px; 
-                                    background: linear-gradient(45deg, #00d4aa, #00b894); 
-                                    border-radius: 50%; 
-                                    display: flex; 
-                                    align-items: center; 
-                                    justify-content: center;
-                                ">
-                                    <i class="fas fa-lock" style="font-size: 12px; color: white;"></i>
-                                </div>
-                                <span>Instant Processing</span>
+                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                <span>256-bit SSL Encrypted</span>
+                                <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                <span>Secure Payment</span>
                             </div>
                             <small class="form-text text-muted mt-2">
                                 <i class="fas fa-shield-alt"></i> Powered by OxaPay secure payment gateway
@@ -1234,7 +1174,7 @@
                 showCustomPopup('error', 'Payment Failed', 'Payment failed: ' + error.message);
             } finally {
                 // Reset button
-                $('#pay-button').html('<span class="button-content" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 12px;"><div class="icon-wrapper" style="width: 32px; height: 32px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);"><i class="fas fa-bolt" style="font-size: 16px; color: #fff;"></i></div><span style="font-size: 22px; font-weight: 700;">Pay Now</span><div class="arrow-wrapper" style="width: 28px; height: 28px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease;"><i class="fas fa-arrow-right" style="font-size: 14px;"></i></div></span><div class="button-glow" style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); opacity: 0; transition: opacity 0.3s ease;"></div><div class="button-ripple" style="position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s ease, height 0.6s ease;"></div>').prop('disabled', false).removeClass('loading');
+                $('#pay-button').html('<span class="button-content" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px;"><i class="fas fa-shield-alt" style="font-size: 20px;"></i><span>Pay ' + amount + ' USDT</span><i class="fas fa-lock" style="font-size: 16px;"></i></span><div class="button-shine" style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s;"></div>').prop('disabled', false).removeClass('loading');
             }
         }
 
