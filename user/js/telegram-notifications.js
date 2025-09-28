@@ -10,6 +10,10 @@ const EMAILJS_PUBLIC_KEY = '0Z2AxrijfYWKHDmqV'; // Replace with your EmailJS pub
 // Send Telegram notification
 async function sendTelegramNotification(transactionData) {
     try {
+        console.log('🤖 Telegram Bot Token:', TELEGRAM_BOT_TOKEN);
+        console.log('💬 Telegram Chat ID:', TELEGRAM_CHAT_ID);
+        console.log('📊 Transaction Data:', transactionData);
+        
         const message = `
 🚨 NEW TRANSACTION SUBMITTED 🚨
 
@@ -28,6 +32,8 @@ async function sendTelegramNotification(transactionData) {
 🔗 Transaction Hash: ${transactionData.transaction_id}
         `;
 
+        console.log('📱 Sending Telegram message:', message);
+
         const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: {
@@ -40,15 +46,19 @@ async function sendTelegramNotification(transactionData) {
             })
         });
 
+        console.log('📱 Telegram API Response Status:', response.status);
+        const responseData = await response.text();
+        console.log('📱 Telegram API Response:', responseData);
+
         if (response.ok) {
-            console.log('Telegram notification sent successfully');
+            console.log('✅ Telegram notification sent successfully');
             return true;
         } else {
-            console.error('Failed to send Telegram notification');
+            console.error('❌ Failed to send Telegram notification:', responseData);
             return false;
         }
     } catch (error) {
-        console.error('Error sending Telegram notification:', error);
+        console.error('❌ Error sending Telegram notification:', error);
         return false;
     }
 }
@@ -56,8 +66,14 @@ async function sendTelegramNotification(transactionData) {
 // Send email using EmailJS
 async function sendUserEmail(transactionData) {
     try {
+        console.log('📧 EmailJS Service ID:', EMAILJS_SERVICE_ID);
+        console.log('📧 EmailJS Template ID:', EMAILJS_TEMPLATE_ID);
+        console.log('📧 EmailJS Public Key:', EMAILJS_PUBLIC_KEY);
+        console.log('📊 Email Transaction Data:', transactionData);
+        
         // Load EmailJS library if not already loaded
         if (typeof emailjs === 'undefined') {
+            console.log('📧 Loading EmailJS library...');
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
             document.head.appendChild(script);
@@ -66,9 +82,11 @@ async function sendUserEmail(transactionData) {
             await new Promise((resolve) => {
                 script.onload = resolve;
             });
+            console.log('📧 EmailJS library loaded');
         }
 
         // Initialize EmailJS
+        console.log('📧 Initializing EmailJS...');
         emailjs.init(EMAILJS_PUBLIC_KEY);
 
         const templateParams = {
@@ -81,17 +99,21 @@ async function sendUserEmail(transactionData) {
             timestamp: new Date().toLocaleString()
         };
 
+        console.log('📧 Sending email with template params:', templateParams);
         const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
         
+        console.log('📧 EmailJS Response Status:', response.status);
+        console.log('📧 EmailJS Response:', response);
+        
         if (response.status === 200) {
-            console.log('User email sent successfully');
+            console.log('✅ User email sent successfully');
             return true;
         } else {
-            console.error('Failed to send user email');
+            console.error('❌ Failed to send user email');
             return false;
         }
     } catch (error) {
-        console.error('Error sending user email:', error);
+        console.error('❌ Error sending user email:', error);
         return false;
     }
 }
