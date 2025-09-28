@@ -1,0 +1,38 @@
+⚡ FLASH USDT - Transaction Failed
+=====================================
+
+Dear {{USER_NAME}},
+
+⚠️ TRANSACTION FAILED - Below Minimum Amount
+
+We regret to inform you that your transaction has failed because you placed an order below the minimum amount of {{MINIMUM_AMOUNT}} USDT.
+
+Currently, we only accept orders above {{MINIMUM_AMOUNT}} USDT, and you placed an order of {{ORDER_AMOUNT}} USDT.
+
+To complete your order, please send the remaining amount of {{REMAINING_AMOUNT}} USDT to the wallet address provided below:
+
+💰 SEND REMAINING PAYMENT TO:
+{{WALLET_ADDRESS}}
+
+📋 IMPORTANT INSTRUCTIONS:
+1. Send exactly {{REMAINING_AMOUNT}} USDT to the wallet address above
+2. Use the same network (TRON TRC20) as your original transaction
+3. Include your order reference in the transaction memo if possible
+4. Your Flash USDT will be sent within 15 minutes after payment confirmation
+5. Keep your transaction hash for reference
+
+📧 NEED HELP?
+For further queries or assistance, please email us at:
+support@flashusdt.com
+
+TRANSACTION DETAILS:
+- Order Amount: {{ORDER_AMOUNT}} USDT
+- Minimum Required: {{MINIMUM_AMOUNT}} USDT
+- Remaining Amount: {{REMAINING_AMOUNT}} USDT
+- Transaction Date: {{TRANSACTION_DATE}}
+
+---
+© 2024 Flash USDT. All rights reserved.
+Secure • Fast • Reliable
+
+This email was sent automatically. Please do not reply to this email address.
