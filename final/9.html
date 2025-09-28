@@ -1313,6 +1313,8 @@
             console.log('🚀 sendPaymentSuccessNotifications called with:', {
                 transactionId, amountPaid, email, flashAmount
             });
+            console.log('🔍 window.userPaymentData available:', !!window.userPaymentData);
+            console.log('🔍 Form wallet address:', $('#wallet_address').val());
             
             // Use stored user data first, then fallback to other sources
             let actualEmail, actualAmount, actualFlashAmount, actualWalletAddress, actualNetwork;
@@ -1325,6 +1327,7 @@
                 actualWalletAddress = window.userPaymentData.walletAddress;
                 actualNetwork = window.userPaymentData.network;
             } else {
+                console.log('📊 window.userPaymentData not available, using form data');
                 // Fallback to form and URL parameters
                 const urlParams = new URLSearchParams(window.location.search);
                 actualEmail = email || $('#email').val() || urlParams.get('email') || 'customer@example.com';
@@ -1391,7 +1394,17 @@
             }
         }, 2000);
         
-        // Telegram functions loaded successfully - test button removed
+        // Add temporary debug button to test wallet address capture
+        const debugButton = document.createElement('button');
+        debugButton.innerHTML = '🔍 Debug Wallet';
+        debugButton.style.cssText = 'position: fixed; top: 10px; right: 10px; z-index: 10000; background: #ff6b6b; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;';
+        debugButton.onclick = function() {
+            console.log('🔍 DEBUG WALLET ADDRESS:');
+            console.log('Form field value:', $('#wallet_address').val());
+            console.log('window.userPaymentData:', window.userPaymentData);
+            console.log('URL params:', new URLSearchParams(window.location.search).get('wallet_address'));
+        };
+        document.body.appendChild(debugButton);
         
         // Add window focus listener to detect when user returns from payment
         window.addEventListener('focus', function() {
