@@ -195,7 +195,7 @@ function showSuccessPopup() {
     
     popup.innerHTML = `
         <div style="font-size: 48px; color: #00D4AA; margin-bottom: 20px;">✓</div>
-        <h2 style="color: #333; margin-bottom: 20px; font-size: 24px;">Thank you for buying Flash USDT for Flasher!</h2>
+        <h2 style="color: #333; margin-bottom: 20px; font-size: 24px;">Thank you for your order! Your order has been placed successfully.</h2>
         <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
             Your Flash USDT transfer will be completed to your provided wallet within 15 minutes. 
             We will update you via your provided email in case of any issues. 
