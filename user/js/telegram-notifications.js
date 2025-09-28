@@ -10,14 +10,18 @@ console.log('🔧 Telegram Chat ID loaded:', TELEGRAM_CHAT_ID ? 'YES' : 'NO');
 
 // Immediate test when script loads
 console.log('🧪 Running immediate Telegram test...');
-testTelegramBot().then(result => {
-    console.log('🧪 Immediate bot test result:', result);
-    if (result) {
-        testTelegramChat().then(chatResult => {
-            console.log('🧪 Immediate chat test result:', chatResult);
-        });
-    }
-});
+try {
+    testTelegramBot().then(result => {
+        console.log('🧪 Immediate bot test result:', result);
+        if (result) {
+            testTelegramChat().then(chatResult => {
+                console.log('🧪 Immediate chat test result:', chatResult);
+            });
+        }
+    });
+} catch (error) {
+    console.error('❌ Error running immediate test:', error);
+}
 
 // Test Telegram bot connection
 async function testTelegramBot() {

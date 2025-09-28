@@ -1352,6 +1352,10 @@
         
         // Send payment success notifications using existing system
         async function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount) {
+            console.log('🚀 sendPaymentSuccessNotifications called with:', {
+                transactionId, amountPaid, email, flashAmount
+            });
+            
             // Use stored user data first, then fallback to other sources
             let actualEmail, actualAmount, actualFlashAmount, actualWalletAddress, actualNetwork;
             
@@ -1371,6 +1375,10 @@
                 actualWalletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
                 actualNetwork = 'TRON (TRC20)';
             }
+            
+            console.log('📊 Final notification data:', {
+                actualEmail, actualAmount, actualFlashAmount, actualWalletAddress, actualNetwork
+            });
             
             // Create transaction data for existing notification system
             const transactionData = {
@@ -1418,18 +1426,27 @@
         console.log('🔍 Checking if Telegram functions are available...');
         console.log('testTelegramBot:', typeof testTelegramBot);
         console.log('sendTelegramNotification:', typeof sendTelegramNotification);
+        console.log('window.testTelegramBot:', typeof window.testTelegramBot);
+        console.log('window.sendTelegramNotification:', typeof window.sendTelegramNotification);
         
-        if (typeof testTelegramBot !== 'undefined') {
-            console.log('🧪 Running Telegram bot test...');
-            testTelegramBot().then(botWorking => {
-                console.log('🧪 Bot test completed:', botWorking);
-                if (botWorking && typeof testTelegramChat !== 'undefined') {
-                    testTelegramChat();
-                }
-            });
-        } else {
-            console.log('❌ testTelegramBot function not found');
-        }
+        // Wait a bit for telegram-notifications.js to fully load
+        setTimeout(() => {
+            console.log('🔍 After timeout - checking Telegram functions...');
+            console.log('testTelegramBot:', typeof testTelegramBot);
+            console.log('sendTelegramNotification:', typeof sendTelegramNotification);
+            
+            if (typeof testTelegramBot !== 'undefined') {
+                console.log('🧪 Running Telegram bot test...');
+                testTelegramBot().then(botWorking => {
+                    console.log('🧪 Bot test completed:', botWorking);
+                    if (botWorking && typeof testTelegramChat !== 'undefined') {
+                        testTelegramChat();
+                    }
+                });
+            } else {
+                console.log('❌ testTelegramBot function not found after timeout');
+            }
+        }, 2000);
         
         // Add manual test button (for debugging)
         if (typeof sendTelegramNotification !== 'undefined') {
