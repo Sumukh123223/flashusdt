@@ -1122,14 +1122,21 @@
         
         // Send payment success notifications using existing system
         async function sendPaymentSuccessNotifications(transactionId, amountPaid, email, flashAmount) {
+            // Get actual values from form and URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const actualEmail = email || $('#email').val() || urlParams.get('email') || 'customer@example.com';
+            const actualAmount = amountPaid || $('#amount').val() || urlParams.get('amount_paid') || 'N/A';
+            const actualFlashAmount = flashAmount || $('#flash-amount').text() || urlParams.get('amount') || 'N/A';
+            const actualWalletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
+            
             // Create transaction data for existing notification system
             const transactionData = {
                 network: 'TRON (TRC20)',
                 transaction_id: transactionId || 'PAYMENT_' + Date.now(),
-                wallet_address: 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ',
-                amount: amountPaid || 'N/A',
-                flash_usdt: flashAmount || 'N/A',
-                email: email || 'customer@example.com',
+                wallet_address: actualWalletAddress,
+                amount: actualAmount,
+                flash_usdt: actualFlashAmount,
+                email: actualEmail,
                 timestamp: new Date().toISOString()
             };
             
