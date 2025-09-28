@@ -1088,10 +1088,10 @@
         
         // Show payment confirmation popup
         function showPaymentConfirmationPopup() {
-            // Get actual payment values
+            // Get actual payment values from URL params first, then form values
             const urlParams = new URLSearchParams(window.location.search);
             const flashAmount = urlParams.get('amount') || $('#flash-amount').text() || '1000';
-            const usdtAmount = $('#amount').val() || $('#amount-display').text() || '33.33';
+            const usdtAmount = urlParams.get('amount_paid') || $('#amount').val() || $('#amount-display').text() || '33.33';
             
             // Update popup message with actual values
             const popupMessage = document.getElementById('popup-message');
