@@ -1200,49 +1200,7 @@
         }
 
         // Send Telegram notification
-        async function sendTelegramNotification(walletAddress, amount, trackId) {
-            try {
-                console.log('📱 Sending Telegram notification');
-                
-                const telegramMessage = `🎉 *New Flash USDT Purchase!*
-
-💰 *Amount:* $${amount} USD
-🪙 *Flash USDT:* ${(amount * 30).toFixed(0)} Flash USDT
-🆔 *Track ID:* ${trackId}
-📍 *Wallet:* ${walletAddress}
-
-✅ Payment confirmed and Flash USDT will be sent within 15 minutes.`;
-
-                // Using Telegram Bot API
-                const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
-                const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
-                
-                if (botToken !== 'YOUR_BOT_TOKEN' && chatId !== 'YOUR_CHAT_ID') {
-                    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: telegramMessage,
-                            parse_mode: 'Markdown'
-                        })
-                    });
-                    
-                    if (response.ok) {
-                        console.log('✅ Telegram notification sent successfully');
-                    } else {
-                        console.error('❌ Failed to send Telegram notification');
-                    }
-                } else {
-                    console.log('📱 Telegram bot not configured, would send:', telegramMessage);
-                }
-                
-            } catch (error) {
-                console.error('❌ Failed to send Telegram notification:', error);
-            }
-        }
+        // Duplicate Telegram function removed - using the one from telegram-notifications.js
 
         // Show payment failed
         function showPaymentFailed(paymentData) {
