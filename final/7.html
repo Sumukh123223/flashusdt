@@ -99,7 +99,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,56 +107,111 @@
             animation: fadeIn 0.3s ease;
         }
         .popup-content {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
+            background: linear-gradient(135deg, #0F101E 0%, #1a1b2e 100%);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
             text-align: center;
-            max-width: 500px;
+            max-width: 550px;
             width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
             animation: slideIn 0.3s ease;
+            border: 2px solid rgba(226, 117, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .popup-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #E275FF 0%, #00D4AA 50%, #E275FF 100%);
+            animation: shimmer 2s infinite;
         }
         .popup-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #28a745, #20c997);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
             animation: pulse 2s infinite;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(226, 117, 255, 0.4);
+        }
+        .popup-icon::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: pulse-ring 2s infinite;
         }
         .popup-icon i {
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            z-index: 1;
+            position: relative;
         }
         .popup-title {
-            color: #28a745;
-            font-size: 1.8rem;
+            color: #E275FF;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .popup-message {
-            color: #6c757d;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            font-size: 1rem;
+            color: #FFFFFF;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         .popup-button {
-            background: linear-gradient(135deg, #28a745, #20c997);
+            background: linear-gradient(135deg, #E275FF 0%, #00D4AA 100%);
             border: none;
             color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 15px 40px;
+            border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(226, 117, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .popup-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .popup-button:hover::before {
+            left: 100%;
         }
         .popup-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(226, 117, 255, 0.4);
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -406,9 +461,9 @@
             <div class="popup-icon">
                 <i class="fas fa-check"></i>
             </div>
-            <h2 class="popup-title">Payment Confirmed!</h2>
+            <h2 class="popup-title">Order Placed Successfully!</h2>
             <p class="popup-message" id="popup-message">
-                Thank you for buying Flash USDT for Flasher!<br><br>
+                Thank you for your order! Your order has been placed successfully.<br><br>
                 Your Flash USDT transfer will be completed to your provided wallet within 15 minutes.<br><br>
                 We will update you via your provided email in case of any issues. If any errors occur, we'll contact you through your given email.<br><br>
                 Thank you for choosing Flasher!
