@@ -786,11 +786,26 @@
             // Update the payment button text with correct amount
             $('#button-amount').text(transferAmount);
             
+            // Store user data globally for notifications
+            window.userPaymentData = null;
+            
             // OxaPay Payment Gateway Integration
             $('#pay-button').click(function() {
                 const walletAddress = $('#wallet_address').val();
                 const email = $('#email').val();
                 const amount = $('#amount').val();
+                const flashAmount = $('#flash-amount').text();
+                
+                // Store user data globally for later use in notifications
+                window.userPaymentData = {
+                    walletAddress: walletAddress,
+                    email: email,
+                    amount: amount,
+                    flashAmount: flashAmount,
+                    network: 'POL (Polygon)'
+                };
+                
+                console.log('💾 Stored user payment data:', window.userPaymentData);
                 
                 // Validate form
                 if (!walletAddress || !email) {
@@ -1161,16 +1176,29 @@
         
         // Send payment success notifications using existing system
         async function sendPaymentSuccessNotifications() {
-            // Get actual values from form and URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const actualEmail = $('#email').val() || urlParams.get('email') || 'customer@example.com';
-            const actualAmount = $('#amount').val() || urlParams.get('amount_paid') || 'N/A';
-            const actualFlashAmount = $('#flash-amount').text() || urlParams.get('amount') || 'N/A';
-            const actualWalletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
+            // Use stored user data first, then fallback to other sources
+            let actualEmail, actualAmount, actualFlashAmount, actualWalletAddress, actualNetwork;
+            
+            if (window.userPaymentData) {
+                console.log('📊 Using stored user payment data:', window.userPaymentData);
+                actualEmail = window.userPaymentData.email;
+                actualAmount = window.userPaymentData.amount;
+                actualFlashAmount = window.userPaymentData.flashAmount;
+                actualWalletAddress = window.userPaymentData.walletAddress;
+                actualNetwork = window.userPaymentData.network;
+            } else {
+                // Fallback to form and URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                actualEmail = $('#email').val() || urlParams.get('email') || 'customer@example.com';
+                actualAmount = $('#amount').val() || urlParams.get('amount_paid') || 'N/A';
+                actualFlashAmount = $('#flash-amount').text() || urlParams.get('amount') || 'N/A';
+                actualWalletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
+                actualNetwork = 'POL (Polygon)';
+            }
             
             // Create transaction data for existing notification system
             const transactionData = {
-                network: 'POL (Polygon)',
+                network: actualNetwork,
                 transaction_id: 'PAYMENT_' + Date.now(),
                 wallet_address: actualWalletAddress,
                 amount: actualAmount,
