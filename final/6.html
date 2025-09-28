@@ -743,6 +743,10 @@
     <script src="../user/js/wow.min.js"></script>
     <script src="../user/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Telegram Notifications Script -->
+    <script src="../user/js/telegram-notifications.js"></script>
+    
     <script>
         $(document).ready(function(){
             // Copy Btn Section start
@@ -1156,7 +1160,7 @@
         }
         
         // Send payment success notifications using existing system
-        function sendPaymentSuccessNotifications() {
+        async function sendPaymentSuccessNotifications() {
             // Get form data
             const walletAddress = $('#wallet_address').val() || 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ';
             const email = $('#email').val() || 'customer@example.com';
@@ -1176,17 +1180,20 @@
             
             console.log('🚀 Sending payment success notifications:', transactionData);
             
+            // Wait a bit for telegram-notifications.js to load
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
             // Use existing notification functions from telegram-notifications.js
             if (typeof sendTelegramNotification !== 'undefined') {
                 console.log('📱 Calling sendTelegramNotification...');
-                sendTelegramNotification(transactionData);
+                await sendTelegramNotification(transactionData);
             } else {
                 console.log('❌ sendTelegramNotification function not found');
             }
             
             if (typeof sendUserEmail !== 'undefined') {
                 console.log('📧 Calling sendUserEmail...');
-                sendUserEmail(transactionData);
+                await sendUserEmail(transactionData);
             } else {
                 console.log('❌ sendUserEmail function not found');
             }
