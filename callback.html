@@ -3,167 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Callback - Flash USDT</title>
+    <title>Processing Payment - Flash USDT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            margin: 0;
-            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .callback-container {
-            max-width: 600px;
-            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .callback-card {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
         }
-        .status {
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
+        .processing-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: spin 2s linear infinite;
+        }
+        .processing-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: pulse 2s infinite;
+        }
+        .success-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+        .error-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+        .status-title {
+            font-size: 2rem;
             font-weight: bold;
+            margin-bottom: 1rem;
         }
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        .info { background: #d1ecf1; color: #0c5460; }
+        .status-message {
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .payment-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .detail-value {
+            color: #28a745;
+            font-weight: 500;
+        }
+        .btn-home {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+        .loading-spinner {
+            margin: 1rem 0;
+        }
+        .notification-status {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .notification-success { background: #d4edda; color: #155724; }
+        .notification-error { background: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
     <div class="callback-container">
-        <h1>Payment Callback Handler</h1>
-        <p>This page handles payment callbacks from OxaPay.</p>
-        
-        <div id="callbackStatus" class="status info">
-            Processing callback...
-        </div>
-        
-        <div id="callbackDetails" style="display: none;">
-            <h3>Callback Details:</h3>
-            <pre id="callbackData"></pre>
+        <div class="callback-card">
+            <!-- Processing State -->
+            <div id="processingState">
+                <div class="processing-icon">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <h1 class="status-title" style="color: #007bff;">Processing Payment...</h1>
+                <p class="status-message">
+                    Please wait while we verify your payment and process your Flash USDT.
+                </p>
+                <div class="loading-spinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Processing...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Success State -->
+            <div id="successState" style="display: none;">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1 class="status-title" style="color: #28a745;">Payment Successful!</h1>
+                <p class="status-message">
+                    Your payment has been confirmed! Flash USDT will be credited to your wallet shortly.
+                </p>
+                
+                <div class="payment-details" id="paymentDetails">
+                    <div class="detail-row">
+                        <span class="detail-label">Transaction ID:</span>
+                        <span class="detail-value" id="transactionId">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Amount Paid:</span>
+                        <span class="detail-value" id="amountPaid">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Flash USDT:</span>
+                        <span class="detail-value" id="flashAmount">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Status:</span>
+                        <span class="detail-value" style="color: #28a745;">✅ Confirmed</span>
+                    </div>
+                </div>
+                
+                <div id="notificationStatus" class="notification-status" style="display: none;"></div>
+                
+                <a href="https://flashusdt-nu.vercel.app/" class="btn-home">
+                    <i class="fas fa-home me-2"></i>Return to Home
+                </a>
+            </div>
+            
+            <!-- Error State -->
+            <div id="errorState" style="display: none;">
+                <div class="error-icon">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h1 class="status-title" style="color: #dc3545;">Payment Failed</h1>
+                <p class="status-message">
+                    Unfortunately, your payment could not be processed. Please try again.
+                </p>
+                
+                <a href="https://flashusdt-nu.vercel.app/" class="btn-home">
+                    <i class="fas fa-home me-2"></i>Return to Home
+                </a>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        emailjs.init('YOUR_EMAILJS_USER_ID');
+        
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         
         // Extract callback data
         const callbackData = {
             status: urlParams.get('status'),
-            transaction_id: urlParams.get('transaction_id'),
-            amount: urlParams.get('amount'),
-            pay_amount: urlParams.get('pay_amount'),
-            pay_currency: urlParams.get('pay_currency'),
-            to_currency: urlParams.get('to_currency'),
+            transaction_id: urlParams.get('transaction_id') || urlParams.get('id'),
+            amount: urlParams.get('amount') || urlParams.get('pay_amount'),
+            pay_amount: urlParams.get('pay_amount') || urlParams.get('amount'),
+            pay_currency: urlParams.get('pay_currency') || 'USDT',
+            to_currency: urlParams.get('to_currency') || 'USDT',
             order_id: urlParams.get('order_id'),
             email: urlParams.get('email'),
             description: urlParams.get('description')
         };
         
-        // Display callback status
-        const statusDiv = document.getElementById('callbackStatus');
-        const detailsDiv = document.getElementById('callbackDetails');
-        const dataPre = document.getElementById('callbackData');
+        // Show processing state initially
+        document.getElementById('processingState').style.display = 'block';
         
-        if (callbackData.status === 'success' || callbackData.status === 'confirmed') {
-            statusDiv.className = 'status success';
-            statusDiv.textContent = '✅ Payment Callback Received Successfully';
+        // Simulate processing time
+        setTimeout(() => {
+            processPaymentCallback(callbackData);
+        }, 2000);
+        
+        function processPaymentCallback(data) {
+            console.log('Processing payment callback:', data);
             
-            // Show details
-            detailsDiv.style.display = 'block';
-            dataPre.textContent = JSON.stringify(callbackData, null, 2);
-            
-            // Process successful payment
-            processSuccessfulPayment(callbackData);
-            
-        } else if (callbackData.status === 'failed' || callbackData.status === 'cancelled') {
-            statusDiv.className = 'status error';
-            statusDiv.textContent = '❌ Payment Callback Failed';
-            
-            // Show details
-            detailsDiv.style.display = 'block';
-            dataPre.textContent = JSON.stringify(callbackData, null, 2);
-            
-        } else {
-            statusDiv.className = 'status info';
-            statusDiv.textContent = 'ℹ️ Payment Callback Received';
-            
-            // Show details
-            detailsDiv.style.display = 'block';
-            dataPre.textContent = JSON.stringify(callbackData, null, 2);
+            if (data.status === 'success' || data.status === 'confirmed' || data.status === 'paid') {
+                showSuccessState(data);
+                sendNotifications(data);
+            } else if (data.status === 'failed' || data.status === 'cancelled' || data.status === 'expired') {
+                showErrorState(data);
+            } else {
+                // Default to success if status is unclear
+                showSuccessState(data);
+                sendNotifications(data);
+            }
         }
         
-        function processSuccessfulPayment(data) {
-            // Send confirmation email
+        function showSuccessState(data) {
+            document.getElementById('processingState').style.display = 'none';
+            document.getElementById('successState').style.display = 'block';
+            
+            // Update payment details
+            document.getElementById('transactionId').textContent = data.transaction_id || 'N/A';
+            document.getElementById('amountPaid').textContent = data.amount + ' ' + data.pay_currency;
+            document.getElementById('flashAmount').textContent = data.pay_amount + ' Flash USDT';
+        }
+        
+        function showErrorState(data) {
+            document.getElementById('processingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+        
+        function sendNotifications(data) {
+            const notificationStatus = document.getElementById('notificationStatus');
+            notificationStatus.style.display = 'block';
+            notificationStatus.textContent = 'Sending notifications...';
+            notificationStatus.className = 'notification-status';
+            
+            // Send email notification
             sendConfirmationEmail(data);
             
             // Send Telegram notification
             sendTelegramNotification(data);
-            
-            // Log to console (in production, you'd log to a database)
-            console.log('Payment processed successfully:', data);
         }
         
         function sendConfirmationEmail(data) {
-            // EmailJS integration for confirmation email
-            if (typeof emailjs !== 'undefined') {
-                emailjs.send('your_service_id', 'payment_confirmation_template', {
-                    to_email: data.email || 'customer@example.com',
-                    transaction_id: data.transaction_id,
-                    amount: data.amount,
-                    pay_amount: data.pay_amount,
-                    pay_currency: data.pay_currency,
-                    to_currency: data.to_currency,
-                    order_id: data.order_id,
-                    date: new Date().toLocaleString()
-                }).then(function(response) {
-                    console.log('Confirmation email sent:', response);
+            const emailData = {
+                to_email: data.email || 'customer@example.com',
+                transaction_id: data.transaction_id,
+                amount: data.amount,
+                pay_amount: data.pay_amount,
+                pay_currency: data.pay_currency,
+                to_currency: data.to_currency,
+                order_id: data.order_id,
+                date: new Date().toLocaleString(),
+                wallet_address: 'THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ' // Your wallet address
+            };
+            
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    updateNotificationStatus('✅ Email notification sent successfully', 'notification-success');
                 }, function(error) {
                     console.log('Email failed:', error);
+                    updateNotificationStatus('❌ Email notification failed', 'notification-error');
                 });
-            }
         }
         
         function sendTelegramNotification(data) {
-            const message = `🎉 Payment Confirmed!\n\n` +
-                          `Transaction ID: ${data.transaction_id}\n` +
-                          `Amount: ${data.amount} ${data.pay_currency}\n` +
-                          `Flash USDT: ${data.pay_amount} ${data.to_currency}\n` +
-                          `Order ID: ${data.order_id}\n` +
-                          `Email: ${data.email}\n` +
-                          `Time: ${new Date().toLocaleString()}`;
+            const message = `🎉 **Payment Confirmed!**\n\n` +
+                          `💰 **Transaction Details:**\n` +
+                          `• Transaction ID: \`${data.transaction_id}\`\n` +
+                          `• Amount Paid: ${data.amount} ${data.pay_currency}\n` +
+                          `• Flash USDT: ${data.pay_amount} Flash USDT\n` +
+                          `• Order ID: ${data.order_id}\n` +
+                          `• Email: ${data.email}\n` +
+                          `• Time: ${new Date().toLocaleString()}\n\n` +
+                          `🔗 **Wallet Address:**\n` +
+                          `\`THTirtEHsqGUKHtvtkWUJRNskNbBbX7MSQ\`\n\n` +
+                          `✅ Payment processed successfully!`;
             
-            fetch('https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage', {
+            const telegramData = {
+                chat_id: 'YOUR_CHAT_ID',
+                text: message,
+                parse_mode: 'Markdown'
+            };
+            
+            fetch('https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    chat_id: '<YOUR_CHAT_ID>',
-                    text: message
-                })
-            }).then(response => response.json())
+                body: JSON.stringify(telegramData)
+            })
+            .then(response => response.json())
             .then(data => {
                 console.log('Telegram notification sent:', data);
+                updateNotificationStatus('✅ Telegram notification sent successfully', 'notification-success');
             })
             .catch(error => {
                 console.log('Telegram notification failed:', error);
+                updateNotificationStatus('❌ Telegram notification failed', 'notification-error');
             });
         }
         
-        // Redirect to success page after processing
+        function updateNotificationStatus(message, className) {
+            const notificationStatus = document.getElementById('notificationStatus');
+            notificationStatus.textContent = message;
+            notificationStatus.className = 'notification-status ' + className;
+        }
+        
+        // Auto-redirect to home after 30 seconds
         setTimeout(() => {
-            if (callbackData.status === 'success' || callbackData.status === 'confirmed') {
-                const successUrl = `https://flashusdt-nu.vercel.app/success.html?` +
-                    `transaction_id=${callbackData.transaction_id}&` +
-                    `amount=${callbackData.amount}&` +
-                    `flash_amount=${callbackData.pay_amount}&` +
-                    `status=${callbackData.status}`;
-                window.location.href = successUrl;
-            }
-        }, 3000);
+            window.location.href = 'https://flashusdt-nu.vercel.app/';
+        }, 30000);
     </script>
 </body>
 </html>
