@@ -1439,6 +1439,15 @@
         // Initialize payment success check
         checkPaymentSuccess();
         
+        // Test Telegram bot connection on page load
+        if (typeof testTelegramBot !== 'undefined') {
+            testTelegramBot().then(botWorking => {
+                if (botWorking && typeof testTelegramChat !== 'undefined') {
+                    testTelegramChat();
+                }
+            });
+        }
+        
         // Add window focus listener to detect when user returns from payment
         window.addEventListener('focus', function() {
             console.log('🔄 Window focused - checking for payment success...');
