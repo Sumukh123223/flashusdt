@@ -7,15 +7,15 @@ Replace these placeholders in your email templates:
 ### Required Variables:
 - `{{user_name}}` - Customer's name
 - `{{order_amount}}` - Amount user tried to order (e.g., "0.05")
-- `{{minimum_amount}}` - Minimum required amount (e.g., "1")
+- `{{minimum_amount}}` - Minimum required amount (e.g., "1000")
 - `{{remaining_amount}}` - Amount user needs to pay (calculated: minimum_amount - order_amount)
 - `{{wallet_address}}` - Your wallet address for receiving payments
 
 ### Example Usage:
 ```
 User places order: 0.05 USDT
-Minimum required: 1 USDT
-Remaining amount: 0.95 USDT
+Minimum required: 1000 USDT
+Remaining amount: 999.95 USDT
 ```
 
 ### Email Service Integration:
@@ -25,8 +25,8 @@ Remaining amount: 0.95 USDT
 const templateParams = {
     user_name: 'John Doe',
     order_amount: '0.05',
-    minimum_amount: '1',
-    remaining_amount: '0.95',
+    minimum_amount: '1000',
+    remaining_amount: '999.95',
     wallet_address: 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU'
 };
 ```

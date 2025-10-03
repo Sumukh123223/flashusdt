@@ -51,7 +51,7 @@ async function sendTransactionFailedEmail(orderData) {
  * @param {number} minimumAmount - Minimum required amount
  * @returns {Object} - Result with success status and details
  */
-function validateOrderAmount(orderAmount, minimumAmount = 1) {
+function validateOrderAmount(orderAmount, minimumAmount = 1000) {
     if (orderAmount < minimumAmount) {
         return {
             valid: false,
@@ -73,7 +73,7 @@ function validateOrderAmount(orderAmount, minimumAmount = 1) {
  */
 function handleOrderSubmission(formData) {
     const orderAmount = parseFloat(formData.amount);
-    const minimumAmount = 1; // Your minimum amount
+    const minimumAmount = 1000; // Your minimum amount
     
     // Validate order amount
     const validation = validateOrderAmount(orderAmount, minimumAmount);

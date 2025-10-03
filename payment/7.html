@@ -198,7 +198,7 @@
                             <label for="usdt"> How much FLASH USDT you want ? </label><br><br>
                             <input type="number" class="form-control" id="usdt" placeholder="Enter USDT">
                             <div id="errorMessage" style="color: red; font-size: 14px; margin-top: 10px; display: none;">
-                                Minimum order value is 1 flash
+                                Minimum order value is 1000 flash
                             </div>
                         </div><br>
                         <div class="text-center mt-3">
@@ -649,7 +649,7 @@ Flash USDT is available on Binance, TRC20, and Ethereum (ETH). The platform allo
     $(document).ready(function(){
         $('#usdtCalBtn').click(function(){
             var usdt = $('#usdt').val();
-            if(usdt < 1){
+            if(usdt < 1000){
                 $('#errorMessage').show();
                 return false;
             }
