@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366F1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E275FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E275FF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradient1)" stroke="#ffffff" stroke-width="4"/>
+  
+  <!-- Main Logo Symbol - Stylized F -->
+  <g transform="translate(100, 100)">
+    <!-- Vertical bar of F -->
+    <rect x="-25" y="-40" width="8" height="80" fill="#ffffff" rx="4"/>
+    
+    <!-- Top horizontal bar of F -->
+    <rect x="-25" y="-40" width="35" height="8" fill="#ffffff" rx="4"/>
+    
+    <!-- Middle horizontal bar of F -->
+    <rect x="-25" y="-8" width="25" height="8" fill="#ffffff" rx="4"/>
+    
+    <!-- Crypto/Blockchain accent dots -->
+    <circle cx="15" cy="-25" r="3" fill="url(#gradient2)"/>
+    <circle cx="20" cy="-20" r="2.5" fill="url(#gradient2)"/>
+    <circle cx="15" cy="-15" r="2" fill="url(#gradient2)"/>
+    
+    <!-- Lightning bolt accent -->
+    <path d="M 25 -15 L 35 -25 L 30 -25 L 35 -15 L 25 -15" fill="#ffffff" opacity="0.8"/>
+  </g>
+  
+  <!-- Brand text -->
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#ffffff">FLASHERR</text>
+  <text x="100" y="180" font-family="Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="middle" fill="#ffffff" opacity="0.9">CRYPTO</text>
+</svg>

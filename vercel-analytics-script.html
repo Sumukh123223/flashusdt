@@ -1,0 +1,16 @@
+<!-- Add this script to your HTML files for Vercel Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<!-- Alternative: Add this to your <head> section in index.html and other pages -->
+<script>
+  (function() {
+    var va = window.va = window.va || function() {
+      (va.q = va.q || []).push(arguments);
+    };
+    va('init');
+  })();
+</script>
+<script async src="https://cdn.vercel.com/insights/script.js"></script>
