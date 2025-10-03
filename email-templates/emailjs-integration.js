@@ -22,8 +22,7 @@ async function sendTransactionFailedEmail(orderData) {
             order_amount: orderData.orderAmount.toString(),
             minimum_amount: orderData.minimumAmount.toString(),
             remaining_amount: remainingAmount,
-            wallet_address: orderData.walletAddress || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU',
-            transaction_date: new Date().toLocaleString()
+            wallet_address: orderData.walletAddress || 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU'
         };
 
         // Send email using EmailJS

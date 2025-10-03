@@ -520,9 +520,9 @@
                                 font-size: 20px; 
                                 font-weight: 600; 
                                 border-radius: 25px; 
-                                background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
-                                border: 3px solid #ff4757;
-                                box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                                border: none !important;
+                                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
                                 color: white;
                                 text-transform: none;
                                 letter-spacing: 0.5px;
@@ -532,54 +532,7 @@
                                 cursor: pointer;
                                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                             ">
-                                <span class="button-content" style="position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 12px;">
-                                    <div class="icon-wrapper" style="
-                                        width: 32px; 
-                                        height: 32px; 
-                                        background: rgba(255,255,255,0.2); 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center;
-                                        backdrop-filter: blur(10px);
-                                    ">
-                                        <i class="fas fa-bolt" style="font-size: 16px; color: #fff;"></i>
-                                    </div>
-                                    <span style="font-size: 22px; font-weight: 700;">Pay <span id="button-amount">33.33</span> USDT</span>
-                                    <div class="arrow-wrapper" style="
-                                        width: 28px; 
-                                        height: 28px; 
-                                        background: rgba(255,255,255,0.25); 
-                                        border-radius: 50%; 
-                                        display: flex; 
-                                        align-items: center; 
-                                        justify-content: center;
-                                        transition: transform 0.3s ease;
-                                    ">
-                                        <i class="fas fa-arrow-right" style="font-size: 14px;"></i>
-                                    </div>
-                                </span>
-                                <div class="button-glow" style="
-                                    position: absolute;
-                                    top: -50%;
-                                    left: -50%;
-                                    width: 200%;
-                                    height: 200%;
-                                    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-                                    opacity: 0;
-                                    transition: opacity 0.3s ease;
-                                "></div>
-                                <div class="button-ripple" style="
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    width: 0;
-                                    height: 0;
-                                    background: rgba(255,255,255,0.3);
-                                    border-radius: 50%;
-                                    transform: translate(-50%, -50%);
-                                    transition: width 0.6s ease, height 0.6s ease;
-                                "></div>
+                                <span style="text-align: center; width: 100%; display: block;">Pay Now <span id="button-amount">33.33</span> USDT</span>
                             </button>
                             
                             <!-- Modern Security Badge -->
@@ -1186,8 +1139,8 @@
                         under_paid_coverage: 20,
                         to_currency: 'USDT',
                         auto_withdrawal: false,
-                        callback_url: 'https://flashusdt-nu.vercel.app/callback',
-                        return_url: 'https://flashusdt-nu.vercel.app/final/9.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email) + '&wallet_address=' + encodeURIComponent(walletAddress),
+                        callback_url: 'https://flasherr.online/callback',
+                        return_url: 'https://flasherr.online/final/9.html?payment_success=true&amount=' + encodeURIComponent($('#flash-amount').text()) + '&amount_paid=' + encodeURIComponent(amount) + '&email=' + encodeURIComponent(email) + '&wallet_address=' + encodeURIComponent(walletAddress),
                         email: email,
                         order_id: orderId,
                         description: `Flash USDT Purchase - ${amount} USD - Wallet: ${walletAddress}`
@@ -1235,7 +1188,7 @@
                 showCustomPopup('error', 'Payment Failed', 'Payment failed: ' + error.message);
             } finally {
                 // Reset button
-                $('#pay-button').html('<span class="button-content" style="position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px;"><i class="fas fa-shield-alt" style="font-size: 20px;"></i><span>Pay ' + amount + ' USDT</span><i class="fas fa-lock" style="font-size: 16px;"></i></span><div class="button-shine" style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s;"></div>').prop('disabled', false).removeClass('loading');
+                $('#pay-button').html('<span style="text-align: center; width: 100%; display: block;">Pay Now ' + amount + ' USDT</span>').prop('disabled', false).removeClass('loading');
             }
         }
 
@@ -1441,7 +1394,7 @@
             setTimeout(() => {
                 document.getElementById('paymentConfirmationPopup').style.display = 'none';
                 // Redirect to home page
-                window.location.href = 'https://flashusdt-nu.vercel.app/';
+                window.location.href = 'https://flasherr.online/';
             }, 5000);
         }
         
@@ -1449,7 +1402,7 @@
         function closeConfirmationPopup() {
             document.getElementById('paymentConfirmationPopup').style.display = 'none';
             // Redirect to home page
-            window.location.href = 'https://flashusdt-nu.vercel.app/';
+            window.location.href = 'https://flasherr.online/';
         }
         
         // Custom Popup System Functions

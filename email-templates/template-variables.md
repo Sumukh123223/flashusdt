@@ -1,16 +1,15 @@
-# Email Template Variables
+# Email Template Variables - Flasherr Style
 
 ## Transaction Failed Template Variables
 
 Replace these placeholders in your email templates:
 
 ### Required Variables:
-- `{{USER_NAME}}` - Customer's name
-- `{{ORDER_AMOUNT}}` - Amount user tried to order (e.g., "0.05")
-- `{{MINIMUM_AMOUNT}}` - Minimum required amount (e.g., "1")
-- `{{REMAINING_AMOUNT}}` - Amount user needs to pay (calculated: MINIMUM_AMOUNT - ORDER_AMOUNT)
-- `{{WALLET_ADDRESS}}` - Your wallet address for receiving payments
-- `{{TRANSACTION_DATE}}` - Date when transaction was attempted
+- `{{user_name}}` - Customer's name
+- `{{order_amount}}` - Amount user tried to order (e.g., "0.05")
+- `{{minimum_amount}}` - Minimum required amount (e.g., "1")
+- `{{remaining_amount}}` - Amount user needs to pay (calculated: minimum_amount - order_amount)
+- `{{wallet_address}}` - Your wallet address for receiving payments
 
 ### Example Usage:
 ```
@@ -28,16 +27,22 @@ const templateParams = {
     order_amount: '0.05',
     minimum_amount: '1',
     remaining_amount: '0.95',
-    wallet_address: 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU',
-    transaction_date: new Date().toLocaleString()
+    wallet_address: 'TCM374m7LuwxAgpSM1yNn3uU5HwZtPUpEU'
 };
 ```
 
 #### For Other Email Services:
 Replace the variables in the HTML/text templates with actual values before sending.
 
+### Design Features:
+- **Dark Theme**: Matches your website's dark gradient background
+- **Brand Colors**: Uses your purple (#E275FF) and teal (#00D4AA) gradients
+- **Mobile Responsive**: Optimized for all devices
+- **Professional Layout**: Clean, modern design with proper spacing
+- **Clear Hierarchy**: Easy to read with proper typography
+
 ### Customization:
-- Change `support@flashusdt.com` to your actual support email
+- Change `support@flashusdt.com` to `info@flasherr.online` (already updated)
 - Update wallet address to your actual receiving address
 - Modify minimum amount as per your business requirements
-- Customize colors and branding to match your website
+- Colors match your existing Flasherr branding

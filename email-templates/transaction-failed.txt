@@ -1,38 +1,41 @@
-⚡ FLASH USDT - Transaction Failed
-=====================================
+Flasherr - Transaction Failed
+=============================
 
-Dear {{USER_NAME}},
+Dear {{user_name}},
 
 ⚠️ TRANSACTION FAILED - Below Minimum Amount
 
-We regret to inform you that your transaction has failed because you placed an order below the minimum amount of {{MINIMUM_AMOUNT}} USDT.
+We regret to inform you that your transaction has failed because you placed an order below the minimum amount of {{minimum_amount}} USDT.
 
-Currently, we only accept orders above {{MINIMUM_AMOUNT}} USDT, and you placed an order of {{ORDER_AMOUNT}} USDT.
+Currently, we only accept orders above {{minimum_amount}} USDT, and you placed an order of {{order_amount}} USDT.
 
-To complete your order, please send the remaining amount of {{REMAINING_AMOUNT}} USDT to the wallet address provided below:
+To complete your order, please send the remaining amount of {{remaining_amount}} USDT to the wallet address provided below:
 
 💰 SEND REMAINING PAYMENT TO:
-{{WALLET_ADDRESS}}
+{{wallet_address}}
+
+📸 After sending payment, please send screenshot to: info@flasherr.online
 
 📋 IMPORTANT INSTRUCTIONS:
-1. Send exactly {{REMAINING_AMOUNT}} USDT to the wallet address above
+1. Send exactly {{remaining_amount}} USDT to the wallet address above
 2. Use the same network (TRON TRC20) as your original transaction
 3. Include your order reference in the transaction memo if possible
-4. Your Flash USDT will be sent within 15 minutes after payment confirmation
-5. Keep your transaction hash for reference
+4. Take a screenshot of your payment transaction
+5. Send the screenshot to: info@flasherr.online
+6. Your Flash USDT will be sent within 15 minutes after payment confirmation
+7. Keep your transaction hash for reference
 
 📧 NEED HELP?
 For further queries or assistance, please email us at:
-support@flashusdt.com
+info@flasherr.online
 
 TRANSACTION DETAILS:
-- Order Amount: {{ORDER_AMOUNT}} USDT
-- Minimum Required: {{MINIMUM_AMOUNT}} USDT
-- Remaining Amount: {{REMAINING_AMOUNT}} USDT
-- Transaction Date: {{TRANSACTION_DATE}}
+- Order Amount: {{order_amount}} USDT
+- Minimum Required: {{minimum_amount}} USDT
+- Remaining Amount: {{remaining_amount}} USDT
 
 ---
-© 2024 Flash USDT. All rights reserved.
-Secure • Fast • Reliable
+This is an automated message from Flasherr.in
+Copyright © 2024 Flasherr. All rights reserved.
 
 This email was sent automatically. Please do not reply to this email address.

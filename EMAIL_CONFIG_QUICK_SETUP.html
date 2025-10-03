@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Configuration Quick Guide</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .step { background: #e8f4fd; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #2196F3; }
+        .code { background: #f0f0f0; padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0; }
+        .highlight { background: #fff3cd; padding: 10px; border-radius: 5px; border-left: 4px solid #ffc107; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Email Configuration: Send FROM info@flasherr.online</h1>
+        
+        <div class="highlight">
+            <strong>Current Status:</strong> You're logged into info@flasherr.online in Titan Email. Now configure Gmail to send emails FROM this address.
+        </div>
+
+        <h2>🎯 Gmail Setup (Recommended Method)</h2>
+        
+        <div class="step">
+            <h3>Step 1: Gmail Settings</h3>
+            <p>1. Go to Gmail → Settings (⚙️) → "See all settings"</p>
+            <p>2. Click "Accounts and Import" tab</p>
+            <p>3. In "Send mail as" section → "Add another email address"</p>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Email Details</h3>
+            <div class="code">
+                Name: Flasherr Support
+                Email: info@flasherr.online
+                ✅ Treat as an alias
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: SMTP Configuration</h3>
+            <div class="code">
+                SMTP Server: smtp.titan.email
+                Port: 587
+                Username: info@flasherr.online
+                Password: [Your password]
+                ✅ Secured connection using TLS
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Verification</h3>
+            <p>1. Gmail sends verification email to info@flasherr.online</p>
+            <p>2. Check Titan webmail (your current screen)</p>
+            <p>3. Click verification link or enter code</p>
+            <p>4. Set as default: "make default" next to info@flasherr.online</p>
+        </div>
+
+        <h2>📱 Quick Alternative: Mobile App</h2>
+        
+        <div class="highlight">
+            From your Titan Email screen, click "Download Titan app" and set it as your primary email app for mobile.
+        </div>
+
+        <h2>🔧 Manual Email Client Setup</h2>
+        
+        <div class="step">
+            <h3>Apple Mail / Outlook Setup</h3>
+            <div class="code">
+                Email: info@flasherr.online
+                Password: [Your password]
+                IMAP Server: imap.titan.email (Port: 993)
+                SMTP Server: smtp.titan.email (Port: 587)
+                Use SSL/TLS for both
+            </div>
+        </div>
+
+        <h2>✅ Expected Results</h2>
+        
+        <div class="step">
+            <ul>
+                <li>✅ All new emails compose FROM info@flasherr.online</li>
+                <li>✅ Reply emails automatically use info@flasherr.online</li>
+                <li>✅ Mobile Gmail shows info@flasherr.online as sender</li>
+                <li>✅ Recipients see Flasherr Support as the sender</li>
+            </ul>
+        </div>
+
+        <h2>🆘 Troubleshooting</h2>
+        
+        <div class="step">
+            <p><strong>Verification email not arrived?</strong></p>
+            <p>Check your Titan webmail inbox (the interface you have open)</p>
+            
+            <p><strong>Can't connect to smtp.titan.email?</strong></p>
+            <p>Try port 465 with SSL instead of 587 with TLS</p>
+            
+            <p><strong>Still sending from personal email?</strong></p>
+            <p>Make sure you clicked "make default" after verification</p>
+        </div>
+
+        <div class="highlight">
+            <strong>Quick Check:</strong> After setup, compose a test email to yourself. The "From" field should show info@flasherr.online.
+        </div>
+    </div>
+</body>
+</html>
